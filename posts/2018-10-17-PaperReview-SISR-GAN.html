@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Monotonically Increasing Happiness - Paper Review for Photo-Realistic SISR Using a GAN</title>
+        <link rel="stylesheet" href="../css/queens.css" />
+        <meta name="Keywords" content="Heuna Kim, computational geometry, deep learning researcher" />
+        <meta name="description" content="Heuna Kim, Ph.D, Mathematics and Computer Science" />
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="../">Dr. Heuna Kim</a>
+                Mathematics and Computer Science
+            </div>
+            <nav>
+                <a href="../">Home</a>
+                <a href="../publication.html">Publication</a>
+                <a href="../project.html">Project</a>
+                <a href="../archive.html">Archive</a>
+            </nav>
+        </header>
+
+        <main role="main">
+            <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            <h1>Paper Review for Photo-Realistic SISR Using a GAN</h1>
+            <article>
+    <section class="header">
+        Posted on October 17, 2018
+        
+            by Heuna Kim
+        
+    </section>
+    <section>
+        <p><a href="https://arxiv.org/abs/1609.04802">Paper</a></p>
+<h4 id="main-contribution">Main Contribution</h4>
+<ul>
+<li>SRResNet : set a new best benchmark result for SISR for PSNR measure</li>
+<li>SRGAN:
+<ul>
+<li>Content loss: a variant of pixel-wise loss depending on the network feature map</li>
+<li>Adversarial loss: the probability of the discriminator over all training samples <img width="220" alt=" l_{Gen}^{SR} = \sum_{n=1}^N - log D_{\theta_D}(G_{\theta_G}(I^{LR}))" height="48" src="data:image/png;base64,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" class="display-math" style="margin:0; vertical-align:-20px;" /></li>
+<li>GAN based minmax between generated and original <img width="554" alt=" \min_{\theta_G} \max_{\theta_D} E_{I^{HR} \sim p_{train}(I^{HR})} [\log D_{\theta_D}(I^{HR})] + E_{I^{LR} \sim p_G(I^{LR})} [\log(1- D_{\theta_D}(G_{\theta_G}(I^{HR})))] " height="27" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABFQAAAA3CAQAAACI29Y8AAATHklEQVR4nO1da8GrMAzFAhawgAUszAIWZgELWJgFLMzCLMzCvbSF0UfSB/S1fTn7ce9HgZaSE9ImTZuGQCD8PrpmaZ7Nv/W3NA/gSGec+V7/Fb/XWj6UajiBQEgI0gwEAqEijKuSmZUjt/XIAzlzkv6e17/HpG0jEAilQJqBQCBUAlOpTOuRO3LmTfq75eMoAoHwiyDNQCAQKsFrVSqdcoRN5PbIma30d8sngqEzCQTCt4M0A4GQAf3Ha/pXKNMrE7A+6FaF8lKOYKMhduZTOTJKR9q15ta86A++g+9F/ncVLq/fhjqe8EwrUmuG8BLSJYSfxMA9p+zXuU/+ATAiw8THcd4P3a5q7C2pjHFVTWbt3fYG/lF4XfXIzZcz8vpd8HnCfu33Qfv0xv0Qn+vn1JohvIR0SQAmjx+hDjDFe0DY4iw2PT2mj+0v/x7r8THZR6Bf1YN5784hnzNXMoP0m7380ONa26ypkjuoxgTiKRdiYCrk5Qssr6lQDyMP3Nb63+s5+1qZXW7vUSUYa0UdmuFMSSJDpeP21c194leACdGDe+CexmvejxPqgKp4h/XdPfniuhw13zh9WW0H0e/rsTenf/xxZLs+G6REWqktz03xyHh9RtH7723xQ4szZn4vSPktqIqNp1yIgamQky+YvIqyObqxWQ8j9/a8+IxFL50/8RmMmxaYmqoVtWiG8JJEhsq0icfv4MafCOqsPtOIneADVfEyTBklcQClpN3IHFsxTtbnEhJrqr+zfmgm55A50KEhdHGVCzEwBXLyBZPXfv2svjRXQizUwsh261fzgz5thlO8ttj1Qg2aIbwk2YzK+8dWVQvTCyubkRJCbpQ1VHApeSC+3vPoHOTF2nLeD415imekf+MqF2JgCuTjCyyv+9j+mchQqYORLX8+TEZfUWcEXXqhBs0QXpIsRqX9sWBG24QoecjrQVlDZUHratH5gLOYHcoNk9jzmRIeyBMMyHH3874DQgiJgSmQjy92eV0SGSo1MNJupogej/fsLr1Qg2YIL6FgWi8IocaEafqpuaPvRllDxSYli1VZhaJFVIhcDrflfKaEN6ouXuC4y61c/NUPMTANcvHFJa+pDJUaGOmK+rlF9D64+rkOzRBeQoaKF3D/OMNEnVgNShoqsD9cbke8zI13Q6mowCT2fKaEjt9RqCf9vlMD+dhjGirEwDTIxReXvKYxVGpgpKjF9uyDo29itOJADZohvIQMFS+YXr1R6rh0i90IoShpqNiiKFyloXhqSsW3NtgPDfWP7ofuP3ccjE8KPCaMaagQA9MgF19c8prGUCnPyME6p7OfY++b662QUYNmCC9xaAq2mGn6jFeGbUFSL5XrR0TDxfHR+z4xahXoVpuSrVCfjUftlPXh5jFb1LU5eff48bRF3wpfxds30yYn8LLAkUvYnX8Au/Wsx6oAXAsIcX/43o5YI6fWOWkNTTfPPEfGP57FYdzaJI68P0ca5fhLOS582DcglRTcnpiGCjEwDfLwxS2vaQyV8oxcOLvskjpEc0C5+7kOzRBe4tAU+ybPE1/QxcRQLLOamwY4Ij+MujzZdp9YtTKMK0GE+TKs93gqpszIE+z8a+SsC+P299uaotf06vWUt6FS+CjedpWS5yb4Hf+/bmi/uBy1q6S9eX4HRj/3ONM+dpojjt8Gh1q3R3ScR49Gg7wARsQzVIiBqZCHLy55TWWolGakmE/JtyLN3c91aIbwEg9NIWKS5TQ1T36ZfGQxJmtMcYfvgwURnam1U4Jw2BJp05bVhZOtYbcHH+1evbuUMuhNqwwqhVvxttyEleViVlafdDxz5I77h9Y3xwoVuz+82Yz3OHCllLZHdKTAAjxbPEOFGJgKefjiToGewlApz0jxtcmX+NTdz3VohvAST0NFn/5hcxL6kRm4yn0fzNo8U+ukTbPB6X/VFfv66ABry79PCubnCeFTHUyHw0muu1dcU7++BVOqHnErXraUTp3ubbmq3eVmVuSjbdxTt0c9NrUXM3+qSyHF9b77gPWa/obiGSoxGWjK0fcwL/5T5OFLGUOlPCPfmXno7uc6NEN4iaeh8s/jCGSWhF51rVbd53gH799Ji6n8ljXqXr3eoK4LYs+E+fNZHjnVR+VlDNss0p7m+ZXV7o2H1qtPr/bIDTEeXIp3AJWTbNLqS+18P4p2fzgcVDd4SiBUV1hMVWpAKjKeoRKDgQ8ubzfguhqY58uac0+BsSUXX1zymsZQKc3IrrmSn/1MS9z9XIdmCC/xnlHJc+Ta9SxuRabIgNz/tln9Ny9qQF698ChtdclVC9JSPWcKVsY1oLVG+8i41iMdsr+ES/EK80gHM2n3d6pPjbK/fRSG3fcrjGi5Z5jnfz65xwk+aSrunMYPbUNKQyUFA21l+Zl3ljW2Mh+25OKLXV73M2JLbGlG+qz4gXG2Ja5+rkUzhJf8lKGyo+VjCrFdEnx/4UbysyxNr16nUFdeL9R/JqbZFLWsGp7KuATehGpRznFP49WIp9bmdD3Sg3t1uBQvvKeIUCnt1i7VYairMxguf/jLkMVli6jqTnwW7Qopvx/abah0mxS4f+bqqhQMVFGaeWdZoyKcLbn4ctZQ6TfniVtm4Ccry0jcULkbT6DK/NmWuPq5Fs0QXvJzhsrAt9GeeSgXNqPC4G/Bmy6nTuk0XXGY69HN+QJ4XKT6evGY6HoB77mSqkeg2lyKF1YdslK7Ka3tLTKk14IridFQEJOUBMqVS9KEXSHl90P7zKgMwE8OkMUTBaRgoN7Sksw7zxoV4WzJxZfzMyqQ1Jg/aCBRnpGuGZWWG0svwxQ53xJXP9eiGcJLfspQabkH99i+22aoPCxpf1XYvXqm+8jcMUGQeZKIBY2LBsmuHpqFT/19FzD7P1WPsKA+/Q1eV7yC7retBn3FAwa7lDCFpK5Ik5V7+GSsXSHl90Ondf3EYiAWaVSWeaGsOfsUEFty8aWE66c8I92uH2jx8pWWuPq5Fs0QXvJThoq+dwNuqLDURCJSxTWx5vLqmRt3mzsmiJZO0g+Lx5j4uOfpkVysRszIGq50PWKOEl2KF96ldZRGGiLS6dGI9SWT10fLtRONvhJCjmrvT6hFPF6+jB86paESj4G22I5yzAtlzfmnODMDGYcvNnkViG2o1MHIt/VOIqOrboxeaYm9n+vRDOElP2SoyH5TgfFTrr6cPROgiFSxw+7Vu4H2sOkxDY3HmCPuQZEPbzDoNGWPDIbidileWObko+MJKtukpOdKUQ3ak+XudkJ52KIoSvih4fUGcQyVFAxU9yQpy7zzrAl9CpMtufjijvqJbajUwcjZ+oURkSr60u8rLbH3cz2aIbzkhwwV0+w4yuXruuZI9Oumh82rB02mxonHmJwjEKg1LHE1+9z3PCXyPbPrCFKDDGl7RDdwXIpX3kDrwFO6D+zLtwOXkoGnHVRbPhpPFjqKt+23WsIPzZhkfhrjGCopGDho4Z/lmHeFNeFPYUpaHr649weObajUwcjOaho8AWP0Wkvs/VyPZggv+TFDRX3txzr64yzmRZX3oHg7RAH36vVgXIWPZ9kVj4H5GlksB+Sq6raa+80CF97pR2Zv5ISIXcoeafhks36V3i4z2455zeGvZm27g0GdODApEcaz/s7EOGtPX6aOqtS0XfD7FgoQU+sl/NDwBgNxDJVYDJSPye6isswLZc2VpzDZkosvNnk9WhzTUKmFkeKrhJmipjFqawlDy2ewlmbfCU+VEXs/16MZwks8NMVsdLXvET3xsvuqK7WKRG7yRkkD9/O2PMiWoeVpxf4phgp7eVCQmQAcDtU2w5Yc2bRe3Z5ln4whr019HOcdyztNL/DSNNszyhH4w4mx4RVMiNil6hGBRavVVLym3EzKm+v5Tk9yub6Q1hWpAkkJS9f0QrZneElPpk71qmm7bvwe8OZ7L6S3z+duuAJYQcYwVOIxcD8m5j/UstTMwz8voaw5+xR7e81Vknn4gsmrQLctFo6VvaYmRoovoS4P7L1D8x+2ljS8drEZr5AoM88K3s81aYbwEoemUAVwOHXE9z5Xa2UU2vM23rmZIki1bzi4aG1qtGPqCzZXups/M1W06VkeG7Hb5L4dwLJN+C2Wc/Ypv7skxs/12Touni8jrp4prIGfK6sydYOq/oIjSFWJGEwlyJCuRwT00auqeDEpG/ioRYQevoxRyYO3Zv+9tncNGX0jKBf/+POY+3cfrXoqd1BVp+4Ge4Be7rmBRsLqL59SYmwx++eaoRKfgcco9WaUpWOe/fMSzppzT7G3126opOOLKa/785tv9Yrc1sTIHbdtjZGYd7rzcGdRg2ma4S1puSTqMZi6NwBqRX2aIbzkG3OKWdFuE3QHcs4qQJ7lc+iVScZRMhVabf/SSRK7p6Te5Cnb7tKLHr2uhVVuqh7ZoY9IzREiBrG/kC4dPTDmahufsGt/yEbxw/jYLlpN7N2ZCta2UDU/HmDKrXgp9P1xXd7iMs/1eUnFGj+25ONLXfKqIz0j2bwMMxMfn1m1sJa0DZSg1Iweqq2fYc0QXvJzhkpZQJ7lOPfVxydvPkbruY9bnio81NtDerljhrUMsMpN1SM77DMq4cCmTs8EWWJQDUhzktN9hOEVyQC8jtYYgwqUMFRiy9s15rk/L3lZ45pRCYc/X+qRVxP1MBJribk1JAM0eKqpnzHNEF5ChkpUQJ7lGDCVwbgll5anWGWfZ/vZfJ2NrR48Sffesn67pjcC4DpjHNY2aoLy/nNU/2zD3vZUPbLDHaMSBmxadIhIlSOk0ZxEVoMiGdSP4IERGE+VwR3ZX9rdY/FXpsWWtyvM8/m85GWNT4xKGPz5Uo+8mqiHkXBLOqRGCDX1M6YZwkvIUIkIOPdBnDubaDUXl+onv3/oJdKpsSlHoUqZ7/rB00yN6//llHdsclJMUe7T3T0/axccceXE/eyDEblyB2Zt0vXIDveqnzC8LSPEWJ+O+6aCRiDhoLlQ+4aOPcw1HCXQIgGKJZRLfHm7wjyfz0te1vis+glDCF/qkFcI9TASbknYMuVa+hnXDOElZKhERLx4jHN4fsZ1vZJGqlOmYZl5se8mMUh0OAyP5+cp2HLL20fl7FeKO+sqrgdUU/oecedRCYMZSrcfjUl+EZgIrXLQ/eHCDYDtfOvOrJweExq9k1+5lGIgzDyfz0te1vjkUQlDCF/qkFcY9TASaomeyO3I6A3vIF9HP+OaIbwkgi4ZPmP1/ChZt4o9Ep+NMEI3tIoDMSH54OL7VBSSGqHCShZDEY6SMXNMY7Nz58+YSVx5ZKTUx4Jqjs0cPXIzRjtXFW/DF7WzpYP7fW88LiF2gFqPqBJdwdszI2CLW/OhR9ZDMeQ1VMoxEGOe3+clH2tMtuTmS3l5xVEPI82WmBln2YaGWGqPOvoZ1wxnSi7qkpY7EVpgPXd6lKy7Rux+8t541ebyYjNU74i0HpTxQqude4zJHoaxM3ktY44Jc5+U64qXoedUF78pYxS97g9vpdktGHMhs1ig5bFPGP7KdC3GPL/PSz7WQLsK5eZLWXkNRx2MNNcZ2ffRLt/PuGY4U3JZlywbybAdQFOiZN01Ao+ieG1Ce+ytap55zJRM3GTZQ2iFD73bzj8SfncbgWX6dJmnHFugPpHWyMzN8x1Q/eGDl7cZzw6RHgtY93e/g3BgzPP7vORiDcSWEu+qpLyGoxZGTtpcw71xuRXL9jOsGcJLosjnJIk+Fl6UCiXrrhNPNABPvORR2p3DPHOfLGy3BYf7qGHhxNwzTR5XCgNm0ETrzD455zEBSmPPoxOSAL8O6Cm9mHvO7wOWM1OQjBZp3/e+g3PAmef3ecnDGogtZd5VKXkNRV2MvPO5nJGnjGPJ4xbnGyvXz5hmCC+JIJ9qTHve5Lwl664RIs3zCwmuenD32GFSmBEqTCD2zJMjv89h1CzStcunp3t+ltnvS7aRWW/kCSUQcsPOPN/PS3rWEFt+Afu+Q4QAzFL4ZZ/ZWChZd43oHHanmkAfs2m77SzVtu2ka+XjmAW8ZLHke48RBYGQGi7mMbg/L6lZQ2wh/FGoGybdshoLJesmuNBmCT4dSfESfghpWUNsIfxRqCvlwxLSfHPdBAKBQCAQvgBi82p5L0899Tq2sXnauvvPVKz40XogAoFAIBD+IF7Ssi3VFcNg29g8bd0iuG3iRsqNt+NB054EAoFAIPw1yOaBmkbZtbF5yroZ9L0ZzG2mCAQCgUAg/Dj+SUl6H8qG566NzdPVLaDvzWCmXSIQCAQCgfDjOMJZ1b0P3Bubp6tbL8WPEAgEAoFA+GkcqYRl14rPxuap6hbQ92bYtwwjEAgEAoHwh3DfTIRR2UEiz1JhuO6jBaor6EYp9gkEAoFA+HsQKdcXxVTw29g8Td17iT7HMtOmhQQCgUAg/EX04HyGe2PzNHUL6PEoUBQLgUAgEAiEPwm/jc3TQY9QafmWYAQCgUAgEAgcfhubp6tdjlAZpLBbAoFAIBAIhMZ3Y/P4GNea3jzHyv6bKTaFQCAQCASCCffG5gQCgUAgEAje+A+BzyjbxBoSIwAAAABJRU5ErkJggg==" class="display-math" style="margin:0; vertical-align:-13px;" /></li>
+<li>performance improvement on MOS testing by a far margin</li>
+</ul></li>
+</ul>
+<h4 id="relevant-terminologies-to-understand">Relevant Terminologies to understand</h4>
+<ul>
+<li>perceptual similarity</li>
+<li>SSIM - structural similarity</li>
+<li>PSNR - peak signal-to-noise ratio</li>
+<li>MOS - mean opinion score</li>
+<li>Wilcoxon signed-rank tests</li>
+<li>Parametric ReLu</li>
+</ul>
+<h4 id="interesting-relevant-work">Interesting Relevant Work</h4>
+<ul>
+<li><a href="https://pdfs.semanticscholar.org/a286/af401232dcf181af6790873d92585a85f370.pdf">SISR benchmarks</a></li>
+<li><a href="https://link.springer.com/article/10.1007/s00138-014-0623-4">SR survey</a></li>
+<li><a href="https://arxiv.org/abs/1511.06434">GAN guideline</a></li>
+<li><a href="http://people.duke.edu/~sf59/srfinal.pdf%20https://pdfs.semanticscholar.org/938c/a67787b1eb942648f7640c4c07994a0d74de.pdf">multi SR</a></li>
+<li><a href="http://torch.ch/blog/2016/02/04/resnets.html">Resnet guideline</a></li>
+</ul>
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a> and
+            <a href="http://katychuang.com/hakyll-cssgarden/">Hakyll CSS Garden</a>
+        </footer>
+    </body>
+</html>
