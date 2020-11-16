@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Monotonically Increasing Happiness</title>
+    <link href="https://heuna-kim.net/atom.xml" rel="self" />
+    <link href="https://heuna-kim.net" />
+    <id>https://heuna-kim.net/atom.xml</id>
+    <author>
+        <name>Heuna Kim</name>
+        <email>ai@heuna-kim.net</email>
+    </author>
+    <updated>2020-09-14T00:00:00Z</updated>
+    <entry>
+    <title>Migrated notes and the webpage using Hakyll</title>
+    <link href="https://heuna-kim.net/posts/2020-09-14-hakyll-blog-migration.html" />
+    <id>https://heuna-kim.net/posts/2020-09-14-hakyll-blog-migration.html</id>
+    <published>2020-09-14T00:00:00Z</published>
+    <updated>2020-09-14T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Other old notes will be updated sooner or later.</p>]]></summary>
+</entry>
+<entry>
+    <title>Paper Review for Photo-Realistic SISR Using a GAN</title>
+    <link href="https://heuna-kim.net/posts/2018-10-17-PaperReview-SISR-GAN.html" />
+    <id>https://heuna-kim.net/posts/2018-10-17-PaperReview-SISR-GAN.html</id>
+    <published>2018-10-17T00:00:00Z</published>
+    <updated>2018-10-17T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://arxiv.org/abs/1609.04802">Link:Paper</a></p>
+<h4 id="main-contribution">Main Contribution</h4>
+<ul>
+<li>SRResNet : set a new best benchmark result for SISR for PSNR measure</li>
+<li>SRGAN:
+<ul>
+<li>Content loss: a variant of pixel-wise loss depending on the network feature map</li>
+<li>Adversarial loss: the probability of the discriminator over all training samples \[ l_{Gen}^{SR} = \sum_{n=1}^N - log D_{\theta_D}(G_{\theta_G}(I^{LR})) \]</li>
+<li>GAN based minmax between generated and original \[ \min_{\theta_G} \max_{\theta_D} E_{I^{HR} \sim p_{train}(I^{HR})} [\log D_{\theta_D}(I^{HR})] + E_{I^{LR} \sim p_G(I^{LR})} [\log(1- D_{\theta_D}(G_{\theta_G}(I^{HR})))] \]</li>
+<li>performance improvement on MOS testing by a far margin</li>
+</ul></li>
+</ul>
+<h4 id="relevant-terminologies-to-understand">Relevant Terminologies to understand</h4>
+<ul>
+<li>perceptual similarity</li>
+<li>SSIM - structural similarity</li>
+<li>PSNR - peak signal-to-noise ratio</li>
+<li>MOS - mean opinion score</li>
+<li>Wilcoxon signed-rank tests</li>
+<li>Parametric ReLu</li>
+</ul>
+<h4 id="interesting-relevant-work">Interesting Relevant Work</h4>
+<ul>
+<li><a href="https://pdfs.semanticscholar.org/a286/af401232dcf181af6790873d92585a85f370.pdf">SISR benchmarks</a></li>
+<li><a href="https://link.springer.com/article/10.1007/s00138-014-0623-4">SR survey</a></li>
+<li><a href="https://arxiv.org/abs/1511.06434">GAN guideline</a></li>
+<li><a href="http://people.duke.edu/~sf59/srfinal.pdf%20https://pdfs.semanticscholar.org/938c/a67787b1eb942648f7640c4c07994a0d74de.pdf">multi SR</a></li>
+<li><a href="http://torch.ch/blog/2016/02/04/resnets.html">Resnet guideline</a></li>
+</ul>]]></summary>
+</entry>
+<entry>
+    <title>Normalization Techniques</title>
+    <link href="https://heuna-kim.net/posts/2017-03-20-PaperReview-Normalization.html" />
+    <id>https://heuna-kim.net/posts/2017-03-20-PaperReview-Normalization.html</id>
+    <published>2017-03-20T00:00:00Z</published>
+    <updated>2017-03-20T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>The note contains the concept of <code>covariance shift</code> and compares the following normalization techniques in deep learning.</p>
+<ul>
+<li>batch normalization</li>
+<li>dropout</li>
+<li>layer normalization</li>
+<li>weight normalization</li>
+<li>skip connection</li>
+</ul>
+<p><a href="/pdfs/normalization_handwriting.pdf">here is the handwritten note</a></p>]]></summary>
+</entry>
+
+</feed>
