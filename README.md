@@ -1,4 +1,4 @@
 # hahey.github.io
 hahey's personal webpage with the CVs.
 
-https://hahey.github.io/
+Please check out my website: https://heuna-kim.net
