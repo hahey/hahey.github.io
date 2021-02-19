@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Impression of using NiXOS for 2.5 months &middot; Dr. Heuna Kim
+    
+  </title>
+
+  
+      
+  <link rel="canonical" href="https://heuna-kim.net/posts/2021-02-18-Impression-NixOS.html">
+      
+  
+
+  <link rel="stylesheet" href="https://heuna-kim.net/css/poole.css">
+  <link rel="stylesheet" href="https://heuna-kim.net/css/lanyon.css">
+  <link rel="stylesheet" href="https://heuna-kim.net/css/tag-nikola-hyde.css">
+  <link rel="stylesheet" href="https://heuna-kim.net/css/syntax.css">
+  <!-- not yet translated
+  <link rel="stylesheet" href="https://heuna-kim.net/css/syntax-lanyon.css">
+  -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <link rel="shortcut icon" href="https://heuna-kim.net/images/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://heuna-kim.net/atom.xml">
+
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  <!--- deactivate google analytics
+  {% if site.google_analytics_id %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', '{{ site.google_analytics_id }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+  {% endif %}
+  -->
+</head>
+
+
+  <body class="theme-base-0d">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>A Blog about Nerdy and Artistic Things</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="https://heuna-kim.net">Home</a>
+
+    <!--- The code below dynamically generates a sidebar nav of the files in the folder /pages -->
+
+    
+      
+        <a class="sidebar-nav-item" href="https://heuna-kim.net/pages/About.html">About</a>
+      
+    
+      
+        <a class="sidebar-nav-item" href="https://heuna-kim.net/pages/Projects.html">Projects</a>
+      
+    
+      
+        <a class="sidebar-nav-item" href="https://heuna-kim.net/pages/Publications.html">Publications</a>
+      
+    
+
+    <a class="sidebar-nav-item" href="https://heuna-kim.net/archive.html">Archive</a>
+
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+        &copy; 2020 <a href="mailto:ai@heuna-kim.net">Heuna Kim</a>.  <br>
+        All rights reserved.
+    </p>
+    <p>
+        <img src="https://heuna-kim.net/logos_and_icons/haskell-logo.svg" class="logo" style="display: inline; margin: 0 0 0;" />
+        Site created with
+        <a href="https://jaspervdj.be/hakyll">Hakyll</a>.  <br>
+        Modified theme
+        <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a>
+        based on
+        <a href="https://lanyon.getpoole.com/">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="https://heuna-kim.net" title="Home">Dr. Heuna Kim</a>
+            <small>Mathematics and Computer Science</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+          <div class="post">
+    <h1 class="post-title">
+      <a href="../posts/2021-02-18-Impression-NixOS.html">
+        Impression of using NiXOS for 2.5 months
+      </a>
+    </h1>
+    <span class="post-date">February 18, 2021,
+      
+         Posted by Heuna Kim
+      
+    </span>
+    <p>For a Berlin expat, between the last Christmas and the new year is always the best time for trying out a small project that I otherwise never make time to do it. This time I built an acrylic lamp and installed NixOS at my laptop (Lenovo E495 - AMD Ryzen 7). Since then, I have been using it and the experience was quite satisfactory. I would like to share here what I have tried and what Impression I got as a 2.5-months-old baby user.</p>
+<p>For reference, my NixOS configurations are <a href="https://github.com/hahey/nixos-config">here</a>.</p>
+<h3 id="shortly-about-my-general-experiences-of-different-operating-systems">Shortly about my General Experiences of Different Operating Systems:</h3>
+<p>I started using Unix-like variants since 2004 - the first one I tried was FreeBSD and Red Hat. Since 2006, I am using Linux-based System only. I have used U/Ku/Xu-buntu in the beginning (~2011) and switched to Mint (~2014), to Gentoo (~2017), and to Debian (~2019). For working, I have been using mostly Ubuntu, mainly due to the GPU acceleration integration.</p>
+<h2 id="pros">Pros</h2>
+<h3 id="stress-free-installation">1. Stress-free Installation</h3>
+<p>I somehow expected that the installation of NixOS were as complicated as Gentoo or Arch but it was as easy as or as fast as Debian. I wanted to install it with a LUKS setup for the disk and specifying spaces for <code>/tmp</code> with <code>TMPFS</code> and <code>/var</code>. It worked out all smoothly and quickly and I realized that I didn’t need to reserve few days for installing NixOS. If you are interested, you can find my bash script for partitioning with LUKS <a href="https://github.com/hahey/nixos-config/blob/main/luks-tmpfs-configure.sh">here</a>.</p>
+<p>Generally my feeling was that with Gentoo, I need to understand and configure every single details to install it and with Ubuntu/Debian/Mint, I can be agnostic about a lot of detailed setups and use it out of the box but it gets too complicated if I want to customize the configuration here and there. With NixOS, it is more flexible in choosing in which point of this spectrum I want to be for different stages/parts of the installation.</p>
+<h3 id="up-to-date-rolling-updates-and-package-build-and-managements-directly-from-github">2. Up-to-date Rolling Updates and Package Build and Managements directly from Github</h3>
+<p>Installing graphic cards, touchpads, sound devices or other hardware-related firmwares in NixOS was much easier for me than in Ubuntu or Debian. Especially for AMD-based laptops, it was quite a struggle with Debian stable, because it only supports quite old firmwares.</p>
+<p>With Nix language, I could also build the package from the sources with overriding specific arguments and this package can be still managed by the Nix package manager. It happened often to me that if I wanted to build a package with a different option than what’s supported from the package manager of some distro, then I had to clone the repository and build from the sources. Then it has been quite a problem to manage them up to date and I often ended up using a deprecated version for long without knowing. This problem is more or less resolved in the Nix package manager. It is also possible to manage a package directly from a Github via Nix package manager.</p>
+<p>Installing the AMD GPU support <code>rocm</code> for Debian and Ubuntu was really a struggle - I ended up building from the source but then it even didn’t work for me. But with NixOS it was a one-liner and worked without efforts.</p>
+<p>Other application examples that I benefitted by using NixOS were <code>conky</code> and <code>MuseScore</code>. Both did some major upgrades and most of the major changes were not available in some other stable distros. Also I was happy that the versions of Haskell ghc compilers are much more up to date in NixOS.</p>
+<h3 id="a-centralized-and-modularized-management-of-all-rcdotfiles-and-an-user-specific-package-management-using-home-manager">3. a Centralized and Modularized Management of All rc/dotfiles and an User-specific Package Management Using <code>Home Manager</code></h3>
+<p>Officially <code>Home Manager</code> is still under development but I quite like it. I have been using a shaky <a href="https://github.com/hahey/config">self-crafted rc/dotfile manager</a> for a few years by creating a centralized folder and a bash script for setting and updating them automatically. It was somewhat many because I used then <code>zsh</code> with <code>powerline9k</code>, <code>i3</code> with <code>polybar</code> and <code>rofi</code>, <code>vim</code>, <code>conky</code> and some customized aliases for python developments and ssh connections. It took quite some time to translate my setting to be compatible to <code>NixOS Home Manager</code> setup but now I feel that they are now better structured and not using deprecated options or dependencies. <code>powerline9k</code> is for example also deprecated now.</p>
+<h3 id="development-environment-with-nix-shell">4. Development Environment With <code>nix-shell</code></h3>
+<p>I haven’t tried this for Python mainly because most of Python projects that I am working on are collaborative projects and I don’t want to force other people to use Nix. I mainly used it for Haskell and liked that I should specify the dependent Nix packages of Haskell packages in the development environment. This is helpful to test the build environment and not to keep all the packages for specific environment to the whole user environment. Otherwise one can also use <code>nix-env</code> to manage the user environment.</p>
+<h3 id="community-and-documentation">5. Community and Documentation</h3>
+<p>The community is very active and most of the documentations are quite friendly and nice. Still I have an impression that many features and developments are evolving faster than documentation. I believe that it will settle better in near future.</p>
+<h3 id="last-but-not-least-package-dependency-and-rollback">6. Last but not Least: Package Dependency and Rollback</h3>
+<p>Probably this symlink-based <code>*.drv</code> files for the package manager is the most distinctive feature of the Nix package manager. I was able to observe indeed interesting side effects thereof: for example a package A and a package B both have the dependency to a package C but they have different version requirements and it ends up that I am having two different versions of C’ and C’’ in the same system. I felt that it made indeed the desktop manager and the default running component of the OS much more stable - less danger of crashing the whole system due to dependency conflicts. Also this was the main reason that I gave up on using Gentoo at some point. After quasi-“compiling” the configuration with Nix language, it creates a new version but it still keeps a rollback. This rollback will be removed only if I do explicitly a garbage collection. <code>Home Manager</code> takes a similar approach.</p>
+<h2 id="cons">Cons</h2>
+<h3 id="compatibility">1. Compatibility</h3>
+<p>It seems to me that generally this “Nix world” is not really compatible to the world outside.</p>
+<p>For example, for the package maintainers they have to use own Nix package manager to create a hash to update package. I found this somewhat unfriendly for people outside of this religion. I am currently using some less popular geometry software and I saw the maintainer explicitly mentioned that it is not supported in the Nix package manager. I am considering to upload it by myself soon because it seemed not so complicated.</p>
+<p>Also as I mentioned before, all my user configuration files were not directly compatible with <code>Home Manager</code> and I probably cannot use <code>nix-shell</code> when I am collaborating for the development with other people.</p>
+<p>Currently the supports of <code>Appimage</code> and <code>deb</code> for NixOS are somewhat subtle. I was able to run <code>Appimage</code> for the note program <code>boostnote</code> that I am using but I was not able to run any <code>deb</code> files.</p>
+<h3 id="a-relatively-smaller-user-group">2. A Relatively Smaller User Group</h3>
+<p>The user group is relatively small and most of users are quite advanced so it is hard to find an answer for somewhat trivial questions. I also had troubles configuring triple monitors with <code>i3</code>. I assume that this is probably due to a AMD-related issue but I couldn’t find any useful information. Probably there are not many people who are using NixOS with <code>i3</code> with a AMD laptop. I also had some very specific error for installing some package and reported it as an issue quite some time ago and I haven’t gotten any replies. I imagine that I would have been able to find a solution already if it were a bigger community.</p>
+<p>In any case, I have written and compiled this post on NixOS. I’m curios how it will develop further with time. Any feedbacks on my <a href="https://github.com/hahey/nixos-config">NixOS configuration</a> would be also appreciated as a 2.5-month-old user.</p>
+    
+      <div itemprop="keywords" class="tags">
+        <a href="../tags/dev-tools.html" class="tag">dev-tools</a> <a href="../tags/productivity.html" class="tag">productivity</a>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src="https://heuna-kim.net/public/js/script.js"></script>
+
+  </body>
+
+</html>

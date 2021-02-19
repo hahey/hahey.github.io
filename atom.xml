@@ -8,8 +8,45 @@
         <name>Heuna Kim</name>
         <email>ai@heuna-kim.net</email>
     </author>
-    <updated>2020-11-19T00:00:00Z</updated>
+    <updated>2021-02-18T00:00:00Z</updated>
     <entry>
+    <title>Impression of using NiXOS for 2.5 months</title>
+    <link href="https://heuna-kim.net/posts/2021-02-18-Impression-NixOS.html" />
+    <id>https://heuna-kim.net/posts/2021-02-18-Impression-NixOS.html</id>
+    <published>2021-02-18T00:00:00Z</published>
+    <updated>2021-02-18T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>For a Berlin expat, between the last Christmas and the new year is always the best time for trying out a small project that I otherwise never make time to do it. This time I built an acrylic lamp and installed NixOS at my laptop (Lenovo E495 - AMD Ryzen 7). Since then, I have been using it and the experience was quite satisfactory. I would like to share here what I have tried and what Impression I got as a 2.5-months-old baby user.</p>
+<p>For reference, my NixOS configurations are <a href="https://github.com/hahey/nixos-config">here</a>.</p>
+<h3 id="shortly-about-my-general-experiences-of-different-operating-systems">Shortly about my General Experiences of Different Operating Systems:</h3>
+<p>I started using Unix-like variants since 2004 - the first one I tried was FreeBSD and Red Hat. Since 2006, I am using Linux-based System only. I have used U/Ku/Xu-buntu in the beginning (~2011) and switched to Mint (~2014), to Gentoo (~2017), and to Debian (~2019). For working, I have been using mostly Ubuntu, mainly due to the GPU acceleration integration.</p>
+<h2 id="pros">Pros</h2>
+<h3 id="stress-free-installation">1. Stress-free Installation</h3>
+<p>I somehow expected that the installation of NixOS were as complicated as Gentoo or Arch but it was as easy as or as fast as Debian. I wanted to install it with a LUKS setup for the disk and specifying spaces for <code>/tmp</code> with <code>TMPFS</code> and <code>/var</code>. It worked out all smoothly and quickly and I realized that I didn’t need to reserve few days for installing NixOS. If you are interested, you can find my bash script for partitioning with LUKS <a href="https://github.com/hahey/nixos-config/blob/main/luks-tmpfs-configure.sh">here</a>.</p>
+<p>Generally my feeling was that with Gentoo, I need to understand and configure every single details to install it and with Ubuntu/Debian/Mint, I can be agnostic about a lot of detailed setups and use it out of the box but it gets too complicated if I want to customize the configuration here and there. With NixOS, it is more flexible in choosing in which point of this spectrum I want to be for different stages/parts of the installation.</p>
+<h3 id="up-to-date-rolling-updates-and-package-build-and-managements-directly-from-github">2. Up-to-date Rolling Updates and Package Build and Managements directly from Github</h3>
+<p>Installing graphic cards, touchpads, sound devices or other hardware-related firmwares in NixOS was much easier for me than in Ubuntu or Debian. Especially for AMD-based laptops, it was quite a struggle with Debian stable, because it only supports quite old firmwares.</p>
+<p>With Nix language, I could also build the package from the sources with overriding specific arguments and this package can be still managed by the Nix package manager. It happened often to me that if I wanted to build a package with a different option than what’s supported from the package manager of some distro, then I had to clone the repository and build from the sources. Then it has been quite a problem to manage them up to date and I often ended up using a deprecated version for long without knowing. This problem is more or less resolved in the Nix package manager. It is also possible to manage a package directly from a Github via Nix package manager.</p>
+<p>Installing the AMD GPU support <code>rocm</code> for Debian and Ubuntu was really a struggle - I ended up building from the source but then it even didn’t work for me. But with NixOS it was a one-liner and worked without efforts.</p>
+<p>Other application examples that I benefitted by using NixOS were <code>conky</code> and <code>MuseScore</code>. Both did some major upgrades and most of the major changes were not available in some other stable distros. Also I was happy that the versions of Haskell ghc compilers are much more up to date in NixOS.</p>
+<h3 id="a-centralized-and-modularized-management-of-all-rcdotfiles-and-an-user-specific-package-management-using-home-manager">3. a Centralized and Modularized Management of All rc/dotfiles and an User-specific Package Management Using <code>Home Manager</code></h3>
+<p>Officially <code>Home Manager</code> is still under development but I quite like it. I have been using a shaky <a href="https://github.com/hahey/config">self-crafted rc/dotfile manager</a> for a few years by creating a centralized folder and a bash script for setting and updating them automatically. It was somewhat many because I used then <code>zsh</code> with <code>powerline9k</code>, <code>i3</code> with <code>polybar</code> and <code>rofi</code>, <code>vim</code>, <code>conky</code> and some customized aliases for python developments and ssh connections. It took quite some time to translate my setting to be compatible to <code>NixOS Home Manager</code> setup but now I feel that they are now better structured and not using deprecated options or dependencies. <code>powerline9k</code> is for example also deprecated now.</p>
+<h3 id="development-environment-with-nix-shell">4. Development Environment With <code>nix-shell</code></h3>
+<p>I haven’t tried this for Python mainly because most of Python projects that I am working on are collaborative projects and I don’t want to force other people to use Nix. I mainly used it for Haskell and liked that I should specify the dependent Nix packages of Haskell packages in the development environment. This is helpful to test the build environment and not to keep all the packages for specific environment to the whole user environment. Otherwise one can also use <code>nix-env</code> to manage the user environment.</p>
+<h3 id="community-and-documentation">5. Community and Documentation</h3>
+<p>The community is very active and most of the documentations are quite friendly and nice. Still I have an impression that many features and developments are evolving faster than documentation. I believe that it will settle better in near future.</p>
+<h3 id="last-but-not-least-package-dependency-and-rollback">6. Last but not Least: Package Dependency and Rollback</h3>
+<p>Probably this symlink-based <code>*.drv</code> files for the package manager is the most distinctive feature of the Nix package manager. I was able to observe indeed interesting side effects thereof: for example a package A and a package B both have the dependency to a package C but they have different version requirements and it ends up that I am having two different versions of C’ and C’’ in the same system. I felt that it made indeed the desktop manager and the default running component of the OS much more stable - less danger of crashing the whole system due to dependency conflicts. Also this was the main reason that I gave up on using Gentoo at some point. After quasi-“compiling” the configuration with Nix language, it creates a new version but it still keeps a rollback. This rollback will be removed only if I do explicitly a garbage collection. <code>Home Manager</code> takes a similar approach.</p>
+<h2 id="cons">Cons</h2>
+<h3 id="compatibility">1. Compatibility</h3>
+<p>It seems to me that generally this “Nix world” is not really compatible to the world outside.</p>
+<p>For example, for the package maintainers they have to use own Nix package manager to create a hash to update package. I found this somewhat unfriendly for people outside of this religion. I am currently using some less popular geometry software and I saw the maintainer explicitly mentioned that it is not supported in the Nix package manager. I am considering to upload it by myself soon because it seemed not so complicated.</p>
+<p>Also as I mentioned before, all my user configuration files were not directly compatible with <code>Home Manager</code> and I probably cannot use <code>nix-shell</code> when I am collaborating for the development with other people.</p>
+<p>Currently the supports of <code>Appimage</code> and <code>deb</code> for NixOS are somewhat subtle. I was able to run <code>Appimage</code> for the note program <code>boostnote</code> that I am using but I was not able to run any <code>deb</code> files.</p>
+<h3 id="a-relatively-smaller-user-group">2. A Relatively Smaller User Group</h3>
+<p>The user group is relatively small and most of users are quite advanced so it is hard to find an answer for somewhat trivial questions. I also had troubles configuring triple monitors with <code>i3</code>. I assume that this is probably due to a AMD-related issue but I couldn’t find any useful information. Probably there are not many people who are using NixOS with <code>i3</code> with a AMD laptop. I also had some very specific error for installing some package and reported it as an issue quite some time ago and I haven’t gotten any replies. I imagine that I would have been able to find a solution already if it were a bigger community.</p>
+<p>In any case, I have written and compiled this post on NixOS. I’m curios how it will develop further with time. Any feedbacks on my <a href="https://github.com/hahey/nixos-config">NixOS configuration</a> would be also appreciated as a 2.5-month-old user.</p>]]></summary>
+</entry>
+<entry>
     <title>Dynamic Sidebar or Header Activation based on the Current Page in Hakyll</title>
     <link href="https://heuna-kim.net/posts/2020-11-19-Hakyll-Sidebar-Activation.html" />
     <id>https://heuna-kim.net/posts/2020-11-19-Hakyll-Sidebar-Activation.html</id>
@@ -20,90 +57,90 @@
 <p>The problem is an extension of what is described in this blog: <a href="http://mesokurtosis.com/posts/2015-02-22-pages.html">Hakyll, where am I?</a></p>
 <p>The page that you are navigating will be linked to one in your sidebar or your header depending on your layout unless it is one of posts. It is possible to statically link each of such pages manually. But if this list of pages is dynamically generated by loading all pages in some folder (e.g. in the <code>pages</code> folder in <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a>), it gets somewhat more complicated in Hakyll for the following reason.</p>
 <p>An example based on liquid syntax in ruby for such activation will look like (the excerpt from <a href="https://github.com/poole/lanyon/blob/master/_includes/sidebar.html">Lanyon</a>):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1">{% for node in pages_list %}</a>
-<a class="sourceLine" id="cb1-2" title="2">    {% if node.title != null %}</a>
-<a class="sourceLine" id="cb1-3" title="3">          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item{% if page.url == node.url %} active{% endif %}&quot;</span><span class="ot"> href=</span><span class="st">&quot;{{ node.url | absolute_url }}&quot;</span><span class="kw">&gt;</span>{{ node.title }}<span class="kw">&lt;/a&gt;</span></a>
-<a class="sourceLine" id="cb1-4" title="4">    {% endif %}</a>
-<a class="sourceLine" id="cb1-5" title="5">{% endfor %}</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a>{% for node in pages_list %}</span>
+<span id="cb1-2"><a href="#cb1-2"></a>    {% if node.title != null %}</span>
+<span id="cb1-3"><a href="#cb1-3"></a>          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item{% if page.url == node.url %} active{% endif %}&quot;</span><span class="ot"> href=</span><span class="st">&quot;{{ node.url | absolute_url }}&quot;</span><span class="kw">&gt;</span>{{ node.title }}<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>    {% endif %}</span>
+<span id="cb1-5"><a href="#cb1-5"></a>{% endfor %}</span></code></pre></div>
 <p>A direct translation of <code class="sourceCode html">{% if page.url == node.url %}</code> in Hakyll is not possible, because the control flow of Hakyll <code class="sourceCode html">$if(variable)$</code> does not evaluate the boolean value of <code>variable</code> but merely checks whether the key <code>variable</code> exists in the current context or not. Check out <a href="https://jaspervdj.be/hakyll/tutorials/04-compilers.html">this tutorial</a> for understanding the control flow of Hakyll templates.</p>
 <h2 id="approaching-the-solution">Approaching the Solution</h2>
 <p>We will dynamically generate this <code>constField</code> having the page title as a key in the context of <code>listField</code> with a key <code>pages_list</code>. First we add a snapshot to avoid a dependency cycle in compiling the <code>pages</code> folder:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" title="1"> match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-2" title="2">    <span class="op">...</span></a>
-<a class="sourceLine" id="cb2-3" title="3">    pandocCompiler</a>
-<a class="sourceLine" id="cb2-4" title="4">    <span class="op">...</span></a>
-<a class="sourceLine" id="cb2-5" title="5">    <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a> match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="op">...</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    pandocCompiler</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="op">...</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></span></code></pre></div>
 <p>Define the context containing such <code>listField</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">sidebarCtx ::</span> <span class="dt">Context</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Context</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb3-2" title="2">sidebarCtx nodeCtx <span class="ot">=</span></a>
-<a class="sourceLine" id="cb3-3" title="3">    listField <span class="st">&quot;pages_list&quot;</span> nodeCtx (loadAllSnapshots <span class="st">&quot;pages/*&quot;</span> <span class="st">&quot;page-content&quot;</span>) <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb3-4" title="4">    defaultContext</a>
-<a class="sourceLine" id="cb3-5" title="5"></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="ot">baseNodeCtx ::</span> <span class="dt">Context</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb3-7" title="7">baseNodeCtx <span class="ot">=</span></a>
-<a class="sourceLine" id="cb3-8" title="8">    urlField <span class="st">&quot;node-url&quot;</span> <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb3-9" title="9">    titleField <span class="st">&quot;title&quot;</span> <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb3-10" title="10">    baseCtx</a>
-<a class="sourceLine" id="cb3-11" title="11"></a>
-<a class="sourceLine" id="cb3-12" title="12">baseSidebarCtx <span class="ot">=</span> sidebarCtx baseNodeCtx</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="ot">sidebarCtx ::</span> <span class="dt">Context</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Context</span> <span class="dt">String</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>sidebarCtx nodeCtx <span class="ot">=</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>    listField <span class="st">&quot;pages_list&quot;</span> nodeCtx (loadAllSnapshots <span class="st">&quot;pages/*&quot;</span> <span class="st">&quot;page-content&quot;</span>) <span class="ot">`mappend`</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    defaultContext</span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="ot">baseNodeCtx ::</span> <span class="dt">Context</span> <span class="dt">String</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>baseNodeCtx <span class="ot">=</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>    urlField <span class="st">&quot;node-url&quot;</span> <span class="ot">`mappend`</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    titleField <span class="st">&quot;title&quot;</span> <span class="ot">`mappend`</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    baseCtx</span>
+<span id="cb3-11"><a href="#cb3-11"></a></span>
+<span id="cb3-12"><a href="#cb3-12"></a>baseSidebarCtx <span class="ot">=</span> sidebarCtx baseNodeCtx</span></code></pre></div>
 <p>Add dynamically generated <code>constField</code> with the current page title.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb4-1" title="1"><span class="co">--- This is not enough.</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">import</span>           <span class="dt">System.FilePath</span>               (takeBaseName)</a>
-<a class="sourceLine" id="cb4-3" title="3"></a>
-<a class="sourceLine" id="cb4-4" title="4">match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb4-5" title="5">    route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
-<a class="sourceLine" id="cb4-6" title="6">    compile <span class="op">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb4-7" title="7">        pageName <span class="ot">&lt;-</span> takeBaseName <span class="op">.</span> toFilePath <span class="op">&lt;$&gt;</span> getUnderlying</a>
-<a class="sourceLine" id="cb4-8" title="8">        <span class="kw">let</span> pageCtx <span class="ot">=</span> constField pageName <span class="st">&quot;&quot;</span> <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb4-9" title="9">                      baseNodeCtx</a>
-<a class="sourceLine" id="cb4-10" title="10">        <span class="kw">let</span> activeSidebarCtx <span class="ot">=</span> sidebarCtx pageCtx</a>
-<a class="sourceLine" id="cb4-11" title="11"></a>
-<a class="sourceLine" id="cb4-12" title="12">        pandocCompiler</a>
-<a class="sourceLine" id="cb4-13" title="13">            <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></a>
-<a class="sourceLine" id="cb4-14" title="14">            <span class="op">...</span></a>
-<a class="sourceLine" id="cb4-15" title="15">            <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> (activeSidebarCtx <span class="op">&lt;&gt;</span> siteCtx)</a>
-<a class="sourceLine" id="cb4-16" title="16">            <span class="op">&gt;&gt;=</span> relativizeUrls</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">--- This is not enough.</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">import</span>           <span class="dt">System.FilePath</span>               (takeBaseName)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    compile <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>        pageName <span class="ot">&lt;-</span> takeBaseName <span class="op">.</span> toFilePath <span class="op">&lt;$&gt;</span> getUnderlying</span>
+<span id="cb4-8"><a href="#cb4-8"></a>        <span class="kw">let</span> pageCtx <span class="ot">=</span> constField pageName <span class="st">&quot;&quot;</span> <span class="ot">`mappend`</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>                      baseNodeCtx</span>
+<span id="cb4-10"><a href="#cb4-10"></a>        <span class="kw">let</span> activeSidebarCtx <span class="ot">=</span> sidebarCtx pageCtx</span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>        pandocCompiler</span>
+<span id="cb4-13"><a href="#cb4-13"></a>            <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>            <span class="op">...</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>            <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> (activeSidebarCtx <span class="op">&lt;&gt;</span> siteCtx)</span>
+<span id="cb4-16"><a href="#cb4-16"></a>            <span class="op">&gt;&gt;=</span> relativizeUrls</span></code></pre></div>
 <p>The translation of the above html layout will be similar to:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="co">&lt;!-- THIS DOES NOT WORK --&gt;</span></a>
-<a class="sourceLine" id="cb5-2" title="2">$for(pages_list)$</a>
-<a class="sourceLine" id="cb5-3" title="3">    $if(title)$</a>
-<a class="sourceLine" id="cb5-4" title="4">          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item$if($title$)$ active$endif$&quot;</span><span class="ot"> href=</span><span class="st">&quot;$baseurl$$node-url$&quot;</span><span class="kw">&gt;</span>$title$<span class="kw">&lt;/a&gt;</span></a>
-<a class="sourceLine" id="cb5-5" title="5">    $endif$</a>
-<a class="sourceLine" id="cb5-6" title="6">$endfor$</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">&lt;!-- THIS DOES NOT WORK --&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>$for(pages_list)$</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    $if(title)$</span>
+<span id="cb5-4"><a href="#cb5-4"></a>          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item$if($title$)$ active$endif$&quot;</span><span class="ot"> href=</span><span class="st">&quot;$baseurl$$node-url$&quot;</span><span class="kw">&gt;</span>$title$<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    $endif$</span>
+<span id="cb5-6"><a href="#cb5-6"></a>$endfor$</span></code></pre></div>
 <p>As you see in the comment, this is not enough because inside of <code class="sourceCode html">$if(...)$</code> syntax, you cannot evaluate the key by surrounding them with <code>$</code>.</p>
 <h2 id="solution">Solution</h2>
 <p>We can add <code>functionField</code> for evaluating a key for a given context. The <code>functionField</code> needs a function with a type <code>[String] -&gt; Item String -&gt; Compiler String</code>.</p>
 <p>We define the following <code>evalCtxKey</code> function for this purpose:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1"><span class="ot">evalCtxKey ::</span> <span class="dt">Context</span> <span class="dt">String</span> <span class="ot">-&gt;</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb6-2" title="2">evalCtxKey context [key] item <span class="ot">=</span> (unContext context key [] item) <span class="op">&gt;&gt;=</span> \cf <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb6-3" title="3">        <span class="kw">case</span> cf <span class="kw">of</span></a>
-<a class="sourceLine" id="cb6-4" title="4">            <span class="dt">StringField</span> s <span class="ot">-&gt;</span> <span class="fu">return</span> s</a>
-<a class="sourceLine" id="cb6-5" title="5">            _             <span class="ot">-&gt;</span> <span class="fu">error</span> <span class="op">$</span> <span class="st">&quot;Internal error: StringField expected&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="ot">evalCtxKey ::</span> <span class="dt">Context</span> <span class="dt">String</span> <span class="ot">-&gt;</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>evalCtxKey context [key] item <span class="ot">=</span> (unContext context key [] item) <span class="op">&gt;&gt;=</span> \cf <span class="ot">-&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>        <span class="kw">case</span> cf <span class="kw">of</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>            <span class="dt">StringField</span> s <span class="ot">-&gt;</span> <span class="fu">return</span> s</span>
+<span id="cb6-5"><a href="#cb6-5"></a>            _             <span class="ot">-&gt;</span> <span class="fu">error</span> <span class="op">$</span> <span class="st">&quot;Internal error: StringField expected&quot;</span></span></code></pre></div>
 <p>Just if you need, you can also access the meta data as follows:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1"><span class="ot">getMetadataKey ::</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb7-2" title="2">getMetadataKey [key] item <span class="ot">=</span> getMetadataField&#39; (itemIdentifier item) key</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">getMetadataKey ::</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>getMetadataKey [key] item <span class="ot">=</span> getMetadataField&#39; (itemIdentifier item) key</span></code></pre></div>
 <p>The functions <code>unContext</code>, <code>getMetadataField'</code>, and data <code>itemIdentifier</code> are already defined in Hakyll.</p>
 <p>The following is the working version of compiling <code>pages/*</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource haskell numberLines"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" title="1">match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb8-2" title="2">    route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
-<a class="sourceLine" id="cb8-3" title="3">    compile <span class="op">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb8-4" title="4">        pageName <span class="ot">&lt;-</span> takeBaseName <span class="op">.</span> toFilePath <span class="op">&lt;$&gt;</span> getUnderlying</a>
-<a class="sourceLine" id="cb8-5" title="5">        <span class="kw">let</span> pageCtx <span class="ot">=</span> constField pageName <span class="st">&quot;&quot;</span> <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb8-6" title="6">                      baseNodeCtx</a>
-<a class="sourceLine" id="cb8-7" title="7">        <span class="kw">let</span> evalCtx <span class="ot">=</span> functionField <span class="st">&quot;eval&quot;</span> (evalCtxKey pageCtx)</a>
-<a class="sourceLine" id="cb8-8" title="8">        <span class="kw">let</span> activeSidebarCtx <span class="ot">=</span> sidebarCtx (evalCtx <span class="op">&lt;&gt;</span> pageCtx)</a>
-<a class="sourceLine" id="cb8-9" title="9"></a>
-<a class="sourceLine" id="cb8-10" title="10">        pandocCompiler</a>
-<a class="sourceLine" id="cb8-11" title="11">            <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></a>
-<a class="sourceLine" id="cb8-12" title="12">            <span class="op">...</span></a>
-<a class="sourceLine" id="cb8-13" title="13">            <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> (activeSidebarCtx <span class="op">&lt;&gt;</span> siteCtx)</a>
-<a class="sourceLine" id="cb8-14" title="14">            <span class="op">&gt;&gt;=</span> relativizeUrls</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource haskell numberLines"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1"></a>match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>    route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    compile <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>        pageName <span class="ot">&lt;-</span> takeBaseName <span class="op">.</span> toFilePath <span class="op">&lt;$&gt;</span> getUnderlying</span>
+<span id="cb8-5"><a href="#cb8-5"></a>        <span class="kw">let</span> pageCtx <span class="ot">=</span> constField pageName <span class="st">&quot;&quot;</span> <span class="ot">`mappend`</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>                      baseNodeCtx</span>
+<span id="cb8-7"><a href="#cb8-7"></a>        <span class="kw">let</span> evalCtx <span class="ot">=</span> functionField <span class="st">&quot;eval&quot;</span> (evalCtxKey pageCtx)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>        <span class="kw">let</span> activeSidebarCtx <span class="ot">=</span> sidebarCtx (evalCtx <span class="op">&lt;&gt;</span> pageCtx)</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a>        pandocCompiler</span>
+<span id="cb8-11"><a href="#cb8-11"></a>            <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>            <span class="op">...</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>            <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> (activeSidebarCtx <span class="op">&lt;&gt;</span> siteCtx)</span>
+<span id="cb8-14"><a href="#cb8-14"></a>            <span class="op">&gt;&gt;=</span> relativizeUrls</span></code></pre></div>
 <p>and the sidebar layout:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb9-1" title="1">$for(pages_list)$</a>
-<a class="sourceLine" id="cb9-2" title="2">    $if(title)$</a>
-<a class="sourceLine" id="cb9-3" title="3">          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item$if(eval(title))$ active$endif$&quot;</span><span class="ot"> href=</span><span class="st">&quot;$baseurl$$node-url$&quot;</span><span class="kw">&gt;</span>$title$<span class="kw">&lt;/a&gt;</span></a>
-<a class="sourceLine" id="cb9-4" title="4">    $endif$</a>
-<a class="sourceLine" id="cb9-5" title="5">$endfor$</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1"></a>$for(pages_list)$</span>
+<span id="cb9-2"><a href="#cb9-2"></a>    $if(title)$</span>
+<span id="cb9-3"><a href="#cb9-3"></a>          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item$if(eval(title))$ active$endif$&quot;</span><span class="ot"> href=</span><span class="st">&quot;$baseurl$$node-url$&quot;</span><span class="kw">&gt;</span>$title$<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    $endif$</span>
+<span id="cb9-5"><a href="#cb9-5"></a>$endfor$</span></code></pre></div>
 <p>If you want to look at an example code, please check out <a href="https://github.com/hahey/lanyon-hakyll">the codes of lanyon-hakyll</a>.</p>]]></summary>
 </entry>
 <entry>
