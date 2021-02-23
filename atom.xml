@@ -52,7 +52,7 @@
 <li><p>As mentioned before, I cannot use <code>nix-shell</code> when I collaborate in a programming project with other people.</p></li>
 <li><p>Currently the support of <code>*.Appimage</code>, <code>*.deb</code> and <code>*.rpm</code> for NixOS is somewhat subtle. I was able to run <code>*.Appimage</code> for the note program <code>boostnote</code> that I am using. I was not able to run any <code>*.deb</code> or <code>*.rpm</code> files. Although they are intended only for the debian-based and RedHat-based package managers respectively, I was able to run them in Gentoo.</p></li>
 </ul>
-<h3 id="relatively-smaller-user-group-to-debian-or-ubuntu">2. Relatively Smaller User Group to Debian or Ubuntu</h3>
+<h3 id="relatively-smaller-user-group-compared-to-debian-or-ubuntu-and-shorter-history">2. Relatively Smaller User Group compared to Debian or Ubuntu and Shorter History</h3>
 <p>The user group is relatively small (bigger than Gentoo or void Linux by now) and most of users are quite advanced so it is hard to find an answer for somewhat trivial questions.</p>
 <ul>
 <li><p>I had troubles configuring triple monitors with <code>i3</code> in NixOS. I assume that this is probably due to an AMD-related graphic driver issue but I couldn’t find any useful information. Probably there are not many people who are using NixOS with <code>i3</code> with a recent AMD laptop.</p></li>
@@ -202,45 +202,46 @@
 <h3 id="useful-books">2. Useful Books</h3>
 <p>It is often most recommended to read <a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/">Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd Edition by Aurélien Géron</a> for quickly refreshing your knowledge before data science and machine learning related interviews.</p>
 <p>If this book is too difficult for you, my suggestion for an easier book would be <a href="https://www.statlearning.com/">An Introduction to Statistical Learning with Applications in R</a>. (You can download the free PDF file from the official website.) All the codes are in R in this book and these days R is used less and less in industry so I actually recommend this book only for the basic-level non-practical purpose.</p>
-<h3 id="sqldatabase-software-engineering-design-pattern-object-oriented-programming-concepts-big-data-hadoop-kafka">3. SQL/Database, Software Engineering, Design Pattern, Object-oriented Programming Concepts, Big data (Hadoop, Kafka)</h3>
-<p>Prepare these topics mainly looking at the job advertisements for the positions that you are interested in. I would regard them less as core skills for data-science-related jobs except for data engineers. Also these topics are very broad by their own.</p>
+<h3 id="sqldatabase-software-engineering-design-patterns-object-oriented-programming-concepts-big-data-hadoop-kafka">3. SQL/Database, Software Engineering, Design Patterns, Object-oriented Programming Concepts, Big data (Hadoop, Kafka)</h3>
+<p>These topics are very broad by their own. Also I would regard them less as core skills for data-science-related jobs except for data engineers. Prepare these topics mainly by focusing on the job requirements of each specific position that you are interested in.</p>
 <ul>
 <li>Some more tips:
 <ul>
-<li>If you want to check out your SQL skills, check out the SQL section in <a href="https://leetcode.com/">leetcode</a> with the easy mode.</li>
-<li>Understanding and reviewing important git commands is also a good idea if you are preparing these topics.</li>
+<li>If you want to evaluate your SQL skills, check out the SQL section in <a href="https://leetcode.com/">leetcode</a> with the easy mode.</li>
+<li>Understanding and reviewing important Git commands is also a good idea if you are preparing these topics.</li>
 </ul></li>
 </ul>
-<p>You can find some of my notes in these topics at the end of this blog post.</p>
+<p>You can find some of my notes on these topics at the end of this blog post.</p>
 <h3 id="study-on-your-own-cv">4. Study on your own CV</h3>
-<p>This is probably the most important part. All the words and projects written on your CV are good candidates for the interview questions. Prepare to answer them all confidently. In other words, I would recommend not to write keywords that you cannot explain well.</p>
+<p>This is probably the most important part. In interviews, you will be potentially asked about anything written in your CV. Prepare to answer any questions confidently about your CV. In other words, I would recommend not to write keywords that you cannot explain well.</p>
 <h3 id="keywords-for-you-should-know-topics">5. Keywords for You-Should-Know Topics</h3>
 <p>Here I added a list of general important keywords; in my opinion, an applicant of a data scientist position is expected to know these concepts. Please try to cover:</p>
 <ul>
 <li>Machine Learning
 <ul>
-<li>Differences between (Supervised Learning, Unsupervised Learning, Reinforcement Learning), Difference between generative and discriminative models, Difference between batch and online learning</li>
-<li>Difference between overfitting/underfitting, Concept of Bias-Variance Dilemma, Splitting Training, Validation and Test set, Cross Validation</li>
-<li>Examples of regression methods, metrics, difference between ridge, lasso, elastic net and why you want to use them</li>
-<li>Examples of classification methods, metrics (precision, recall, type 1/2 error, confusion matrix, ROC, AUC), when to use Support Vector Machine (SVM) and when to use Random Forest, kernel trick for SVM</li>
+<li>Differences between Supervised Learning / Unsupervised Learning / Reinforcement Learning, differences between generative and discriminative models, differences between batch and online learning</li>
+<li>Differences between Overfitting / Underfitting, concepts of bias-variance dilemma, splitting training / validation / test set, cross-validation</li>
+<li>Examples of regression methods, metrics, differences between Ridge, Lasso, Elastic Net and why you want to use them</li>
+<li>Examples of classification methods, metrics (precision and recall, type I/II errors, confusion matrix, ROC, AUC), when to use Support Vector Machines (SVM) vs. when to use Random Forests, the kernel trick for SVM</li>
 <li>Examples of different ensemble techniques: bagging, boosting, stacking, when to apply them and their effects</li>
 <li>Examples of clustering methods</li>
-<li>the chain law of calculating a derivative, the concept of Stochastic Gradient Descent and back propagation, the mechanism of activation functions (ReLU, Sigmoids)/ convolution unit/ pooling, regulation methods for Neural Network (dropout, batch normalization, skipping connection)</li>
+<li>The chain rule in Calculus, concepts of Stochastic Gradient Descent and backpropagation, the mechanism of activation functions (ReLU, Sigmoids) / convolutional-units / pooling, regulation methods (dropout, batch normalization, skipping connection) for Neural Network</li>
 <li>Difference between feed forward networks and recurrent networks and their examples</li>
-<li>the concept of PCA and Autoencoder for the dimension reduction</li>
+<li>the concept of Principal Component Analysis and autoencoder for the dimension reduction</li>
 </ul></li>
 </ul>
-<p>There are advanced topics that it is good to know when to use them but it is relatively less expected for a junior data scientist to know:</p>
+<p>It is good to know when to use these advanced topics below. It is relatively less expected for a junior data scientist to know them:</p>
 <ul>
-<li><p>Sampling (MCMC, Gipps, Metropolis Hastings…), Expectation Maximization, Gaussian Process, General Adversarial Network, Conditional Random Field/Hidden Markov Model/Kalman filter, Autoregression/ARIMA (Time Series), Matrix Factorization, Collaborative Filtering, Graphical Models, Variational Inference, Topic modeling and Latent Dirichlet Allocation, Restricted Boltzmann Machine, Reinforcement-Learning-related topics</p></li>
+<li><p>Sampling (MCMC, Gipps, Metropolis Hastings…), Expectation Maximization, Gaussian Process, General Adversarial Network, Conditional Random Field / Hidden Markov Model / Kalman filter, Autoregression / ARIMA (Time Series), Matrix Factorization, Collaborative Filtering, Graphical Models, Variational Inference, Topic modeling and Latent Dirichlet Allocation, Restricted Boltzmann Machine, Reinforcement-Learning-related topics</p></li>
 <li><p>Python</p>
 <ul>
-<li>generator/iterator, decorator, context manager, property, (coroutine)</li>
-<li>Sometimes you are asked to implement very simple codes from the concepts above e.g. max pooling or cross validation, ReLU, stride for a convolutional neural network</li>
+<li>List comprehensions, generators/iterators, decorators</li>
+<li>(Advanced: context managers, properties, coroutines, closures)</li>
+<li>Sometimes you are asked to implement very simple codes for the concepts above e.g. max pooling or cross-validation, ReLU, a stride for a convolutional neural network</li>
 </ul></li>
 </ul>
 <h3 id="notes-for-3.">6. Notes for 3.</h3>
-<p>Theses notes are handwritten and probably too compact to learn all of these concepts. Hopefully you can still capture important keywords or use them for looking up or for refreshing what you have learned already.</p>
+<p>Theses notes are handwritten and not written for explaining the concept but as a summary. It is probably hard to learn everything from the notes only by reading them. Still you can hopefully capture important keywords or use them for looking up or for refreshing what you have learned already.</p>
 <ul>
 <li><p>SQL <img src="/images/IMG_20201016_SQL1.jpg" alt="SQL1" /> <img src="/images/IMG_20201016_SQL2.jpg" alt="SQL2" /></p></li>
 <li><p>Objected-oriented Programming <img src="/images/IMG_20201016_OOP.jpg" alt="OOP" /></p></li>
