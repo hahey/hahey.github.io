@@ -8,7 +8,7 @@
 
   <title>
     
-      Dr. Heuna Kim &middot; Mathematics and Computer Science
+      Monotonically Increasing Happiness &middot; Dr. Heuna Kim
     
   </title>
 
@@ -61,14 +61,11 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item active" href="https://heuna-kim.net">Home</a>
+    <a class="sidebar-nav-item" href="https://heuna-kim.net">Home</a>
+    <a class="sidebar-nav-item" href="https://heuna-kim.net/blog/blog_page1.html">Blog</a>
 
     <!--- The code below dynamically generates a sidebar nav of the files in the folder /pages -->
 
-    
-      
-        <a class="sidebar-nav-item" href="https://heuna-kim.net/pages/About.html">About</a>
-      
     
       
         <a class="sidebar-nav-item" href="https://heuna-kim.net/pages/Projects.html">Projects</a>
@@ -85,7 +82,7 @@
 
   <div class="sidebar-item">
     <p>
-        &copy; 2020 <a href="mailto:ai@heuna-kim.net">Heuna Kim</a>.  <br>
+        &copy; 2020 &mdash; 2021 <a href="mailto:ai@heuna-kim.net">Heuna Kim</a>.  <br>
         All rights reserved.
     </p>
     <p>
@@ -114,217 +111,41 @@
       </div>
 
       <div class="container content">
-          <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="./posts/2021-02-18-Impression-NixOS.html">
-        Impression of using NixOS for 2.5 months
-      </a>
-    </h1>
-    <span class="post-date">February 18, 2021,
-      
-         Posted by Heuna Kim
-      
-    </span>
-    <p>For a Berlin expat, between the last Christmas and the new year is always the best time for trying out a small project that I otherwise never make time to do it. This time I have built an acrylic lamp and installed NixOS on my laptop (Lenovo E495 - AMD Ryzen 7). Since then, I have been using it and the experience was quite satisfactory. I would like to share here what I have tried and what impression I have gotten as a 2.5-month-old baby user.</p>
-<p>For reference, my NixOS configurations are <a href="https://github.com/hahey/nixos-config">here</a>.</p>
-<h3 id="shortly-about-my-general-experiences-of-different-operating-systems">Shortly about my General Experiences of Different Operating Systems:</h3>
-<p>I started using Unix-like variants in 2004 - the first one I tried was FreeBSD and Red Hat. Since 2006, I am using Linux-based systems only. I have used U/Ku/Xu-buntu (~ 2011) and switched to Mint (~2014), to Gentoo (~2017), and to Debian (~2020). At work, I have been using mostly Ubuntu, mainly due to the easier integration of the GPU acceleration with CUDA.</p>
-<h2 id="pros">Pros</h2>
-<h3 id="stress-free-installation">1. Stress-free Installation</h3>
-<p>I somehow expected that the installation of NixOS would be as complicated as Gentoo or Arch but it was as easy and fast as Debian. I wanted to install it with a LUKS setup for the disk and specifying spaces for <code>/tmp</code> with <code>TMPFS</code> and <code>/var</code>. This is very simple to do in Debian stable but not in the current Ubuntu stable. It worked out all smooth and quick and I realized that I don’t need to reserve a few days for installing NixOS. If you are interested, you can find my bash script for partitioning with LUKS <a href="https://github.com/hahey/nixos-config/blob/main/luks-tmpfs-configure.sh">here</a>.</p>
-<p>In general I felt that to install Gentoo I need to understand and configure every single detail. I can use most Debian-based distros out of the box and be agnostic about a lot of detailed setups. But it gets often too complicated if I want to customize the configurations here and there. With NixOS I was able to decide easily where on this spectrum I want to be throughout different stages of the installation.</p>
-<h3 id="up-to-date-rolling-updates-and-package-build-and-managements-directly-from-a-github-repository">2. Up-to-date Rolling Updates and Package Build and Managements directly from a Github Repository</h3>
-<ul>
-<li>Installing graphic cards, touchpads, sound devices and any other hardware-related firmwares in NixOS was much easier for me than in Ubuntu or Debian. Especially for recent AMD-based laptops, it was quite a struggle with the current Debian stable, because its kernel only supports quite old firmwares.</li>
-</ul>
-<p>With the Nix language, I could also build a package from the sources with overriding specific arguments and this package can be still managed by the Nix package manager. It happened often to me that if I wanted to build a package with a different option than what’s supported from the package manager of some distro, then I had to clone the repository and build from the sources. Then it can be quite a problem to keep them up to date and I often ended up using a deprecated version for long without realizing. This problem is more or less resolved with the Nix package manager. It is also possible to update a package directly from a Github repository with an usual update command by specifying it in the Nix configuration.</p>
-<ul>
-<li><p>Installing the AMD GPU support <code>rocm</code> in Debian and Ubuntu was really a struggle – I tried to build it from the source but then it didn’t work for me either. But with NixOS it was a one-liner and worked without efforts.</p></li>
-<li><p>The examples of other applications that I benefitted by using NixOS were <code>conky</code> and <code>MuseScore</code>. Both did some major upgrades and most of the major changes were not available in the package manager of some other stable distros. Also I was happy that the versions of Haskell ghc compilers are much more up to date in the Nix package manager.</p></li>
-</ul>
-<h3 id="centralized-and-modularized-management-of-all-rcdotfiles-and-user-specific-package-management-using-home-manager">3. Centralized and Modularized Management of All rc/dotfiles and User-Specific Package Management Using <code>Home Manager</code></h3>
-<p>Officially <code>Home Manager</code> is still under development but I like it quite a lot. I have been using a shaky <a href="https://github.com/hahey/config">self-crafted rc/dotfile manager</a> for a few years by creating a centralized folder of those configuration files and a bash script for symbolic linking and updating them automatically. It got complicated because I was using by then 1) <code>zsh</code> with <code>powerline9k</code>, 2) <code>i3</code> with <code>polybar</code> and <code>rofi</code>, 3) <code>neovim</code>, 4) <code>conky</code> and 5) some customized <code>zsh</code> aliases for Python developments and SSH connections. It took quite some time to translate my rc/dotfiles to be compatible this the NixOS <code>Home Manager</code>. Fortunately I feel that they are now better structured and not based on deprecated options or dependencies. For example, <code>powerline9k</code> is also deprecated now.</p>
-<h3 id="development-environment-with-nix-shell">4. Development Environment With <code>nix-shell</code></h3>
-<p>I haven’t tried this for Python mainly because I don’t want to force other people to use Nix. All of the Python projects that I am now working on are collaborative projects. I mainly used <code>nix-shell</code> for Haskell. I like that I should specify the dependent Nix packages for Haskell packages in the development environment. This is helpful to test the build environment and not to keep all the packages for a specific build to the whole user environment. Otherwise one can also use <code>nix-env</code> to install them in the user environment.</p>
-<h3 id="community-and-documentation">5. Community and Documentation</h3>
-<p>The community is very active and most of the documentation is quite friendly and nice. Still I have the impression that many features and developments are evolving faster than the documentation. This is probably normal and I believe that it will settle in the near future.</p>
-<h3 id="last-but-not-least-package-dependency-and-rollback">6. Last but not Least: Package Dependency and Rollback</h3>
-<p>The package dependency tree is implemented by building derivations first by creating <code>*.drv</code> files and the outputs, stored in <code>/nix/store/</code> and by generating symlinks in <code>/nix/var/nix/gcroots/</code> to the ones in <code>/nix/store/</code>. Probably this symlink-based derivations for the package manager is the most distinctive feature of the Nix package manager.</p>
-<p>I was able to observe interesting side effects thereof: for example a package A and a package B both have the dependency to a package C but they have different version requirements and it ends up that I have two different versions of C’ and C’’ in the same system.</p>
-<p>I observed that this system made indeed the desktop manager and the default running component of the OS much more stable; less danger of crashing the whole system due to dependency conflicts. This was the main reason that I gave up on using Gentoo at some point.</p>
-<p>After quasi-“compiling” the configuration with the Nix language, it creates a new version, while still keeping the old version for the rollback. These old versions will be removed only if I explicitly run a garbage collection. The <code>Home Manager</code> takes a similar approach.</p>
-<h2 id="cons">Cons</h2>
-<h3 id="compatibility">1. Compatibility</h3>
-<p>It seems to me that in general this “Nix world” is not really compatible to the world outside.</p>
-<ul>
-<li><p>The package maintainers have to use their own Nix package manager to create a hash to update the package. I found this somewhat unfriendly for people outside of this religion. I am currently using some less popular geometry software and I saw the maintainer explicitly mentioned that it is not supported in the Nix package manager. I am considering to upload it by myself soon because it seems to be not so complicated.</p></li>
-<li><p>All my user configuration files were not directly compatible with <code>Home Manager</code> and it took quite a while to convert them.</p></li>
-<li><p>As mentioned before, I cannot use <code>nix-shell</code> when I collaborate in a programming project with other people.</p></li>
-<li><p>Currently the support of <code>*.Appimage</code>, <code>*.deb</code> and <code>*.rpm</code> for NixOS is somewhat subtle. I was able to run <code>*.Appimage</code> for the note program <code>boostnote</code> that I am using. I was not able to run any <code>*.deb</code> or <code>*.rpm</code> files. Although they are intended only for the debian-based and RedHat-based package managers respectively, I was able to run them in Gentoo.</p></li>
-</ul>
-<h3 id="relatively-smaller-user-group-compared-to-debian-or-ubuntu-and-shorter-history">2. Relatively Smaller User Group compared to Debian or Ubuntu and Shorter History</h3>
-<p>The user group is relatively small (bigger than Gentoo or void Linux by now) and most of users are quite advanced so it is hard to find an answer for somewhat trivial questions.</p>
-<ul>
-<li><p>I had troubles configuring triple monitors with <code>i3</code> in NixOS. I assume that this is probably due to an AMD-related graphic driver issue but I couldn’t find any useful information. Probably there are not many people who are using NixOS with <code>i3</code> with a recent AMD laptop.</p></li>
-<li><p>While installing some package, I had some specific error to this package. I reported this issue quite some time ago. I haven’t gotten any replies yet.</p></li>
-</ul>
-<p>I imagine that I could have found solutions to these problems already if the Nix community were a bigger.</p>
-<p>In any case, I have compiled this post with <code>nix-shell</code> on NixOS. I’m curios how it will develop further with time. Any feedbacks on my <a href="https://github.com/hahey/nixos-config">NixOS configuration</a> would also be appreciated.</p>
-    
-      <div itemprop="keywords" class="tags">
-    <a href="./tags/dev-tools.html" class="tag">dev-tools</a> <a href="./tags/productivity.html" class="tag">productivity</a>
-    </div>
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="./posts/2020-11-19-Hakyll-Sidebar-Activation.html">
-        Dynamic Sidebar or Header Activation based on the Current Page in Hakyll
-      </a>
-    </h1>
-    <span class="post-date">November 19, 2020,
-      
-         Posted by Heuna Kim
-      
-    </span>
-    <h2 id="situation">Situation</h2>
-<p><a href="https://jaspervdj.be/hakyll/">Hakyll</a> is a haskell-based static site generator that is used to generate my blog. For the migration I ported <a href="https://github.com/poole/lanyon">Lanyon</a> theme designed for Jekyll to <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a> and here I describe one of the problems that I encountered.</p>
-<p>The problem is an extension of what is described in this blog: <a href="http://mesokurtosis.com/posts/2015-02-22-pages.html">Hakyll, where am I?</a></p>
-<p>The page that you are navigating will be linked to one in your sidebar or your header depending on your layout unless it is one of posts. It is possible to statically link each of such pages manually. But if this list of pages is dynamically generated by loading all pages in some folder (e.g. in the <code>pages</code> folder in <a href="https://github.com/hahey/lanyon-hakyll">lanyon-hakyll</a>), it gets somewhat more complicated in Hakyll for the following reason.</p>
-<p>An example based on liquid syntax in ruby for such activation will look like (the excerpt from <a href="https://github.com/poole/lanyon/blob/master/_includes/sidebar.html">Lanyon</a>):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a>{% for node in pages_list %}</span>
-<span id="cb1-2"><a href="#cb1-2"></a>    {% if node.title != null %}</span>
-<span id="cb1-3"><a href="#cb1-3"></a>          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item{% if page.url == node.url %} active{% endif %}&quot;</span><span class="ot"> href=</span><span class="st">&quot;{{ node.url | absolute_url }}&quot;</span><span class="kw">&gt;</span>{{ node.title }}<span class="kw">&lt;/a&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>    {% endif %}</span>
-<span id="cb1-5"><a href="#cb1-5"></a>{% endfor %}</span></code></pre></div>
-<p>A direct translation of <code class="sourceCode html">{% if page.url == node.url %}</code> in Hakyll is not possible, because the control flow of Hakyll <code class="sourceCode html">$if(variable)$</code> does not evaluate the boolean value of <code>variable</code> but merely checks whether the key <code>variable</code> exists in the current context or not. Check out <a href="https://jaspervdj.be/hakyll/tutorials/04-compilers.html">this tutorial</a> for understanding the control flow of Hakyll templates.</p>
-<h2 id="approaching-the-solution">Approaching the Solution</h2>
-<p>We will dynamically generate this <code>constField</code> having the page title as a key in the context of <code>listField</code> with a key <code>pages_list</code>. First we add a snapshot to avoid a dependency cycle in compiling the <code>pages</code> folder:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a> match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>    <span class="op">...</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>    pandocCompiler</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="op">...</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></span></code></pre></div>
-<p>Define the context containing such <code>listField</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="ot">sidebarCtx ::</span> <span class="dt">Context</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Context</span> <span class="dt">String</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>sidebarCtx nodeCtx <span class="ot">=</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>    listField <span class="st">&quot;pages_list&quot;</span> nodeCtx (loadAllSnapshots <span class="st">&quot;pages/*&quot;</span> <span class="st">&quot;page-content&quot;</span>) <span class="ot">`mappend`</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>    defaultContext</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="ot">baseNodeCtx ::</span> <span class="dt">Context</span> <span class="dt">String</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>baseNodeCtx <span class="ot">=</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>    urlField <span class="st">&quot;node-url&quot;</span> <span class="ot">`mappend`</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>    titleField <span class="st">&quot;title&quot;</span> <span class="ot">`mappend`</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>    baseCtx</span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a>baseSidebarCtx <span class="ot">=</span> sidebarCtx baseNodeCtx</span></code></pre></div>
-<p>Add dynamically generated <code>constField</code> with the current page title.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">--- This is not enough.</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">import</span>           <span class="dt">System.FilePath</span>               (takeBaseName)</span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a>match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>    route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>    compile <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>        pageName <span class="ot">&lt;-</span> takeBaseName <span class="op">.</span> toFilePath <span class="op">&lt;$&gt;</span> getUnderlying</span>
-<span id="cb4-8"><a href="#cb4-8"></a>        <span class="kw">let</span> pageCtx <span class="ot">=</span> constField pageName <span class="st">&quot;&quot;</span> <span class="ot">`mappend`</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>                      baseNodeCtx</span>
-<span id="cb4-10"><a href="#cb4-10"></a>        <span class="kw">let</span> activeSidebarCtx <span class="ot">=</span> sidebarCtx pageCtx</span>
-<span id="cb4-11"><a href="#cb4-11"></a></span>
-<span id="cb4-12"><a href="#cb4-12"></a>        pandocCompiler</span>
-<span id="cb4-13"><a href="#cb4-13"></a>            <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a>            <span class="op">...</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>            <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> (activeSidebarCtx <span class="op">&lt;&gt;</span> siteCtx)</span>
-<span id="cb4-16"><a href="#cb4-16"></a>            <span class="op">&gt;&gt;=</span> relativizeUrls</span></code></pre></div>
-<p>The translation of the above html layout will be similar to:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">&lt;!-- THIS DOES NOT WORK --&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>$for(pages_list)$</span>
-<span id="cb5-3"><a href="#cb5-3"></a>    $if(title)$</span>
-<span id="cb5-4"><a href="#cb5-4"></a>          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item$if($title$)$ active$endif$&quot;</span><span class="ot"> href=</span><span class="st">&quot;$baseurl$$node-url$&quot;</span><span class="kw">&gt;</span>$title$<span class="kw">&lt;/a&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>    $endif$</span>
-<span id="cb5-6"><a href="#cb5-6"></a>$endfor$</span></code></pre></div>
-<p>As you see in the comment, this is not enough because inside of <code class="sourceCode html">$if(...)$</code> syntax, you cannot evaluate the key by surrounding them with <code>$</code>.</p>
-<h2 id="solution">Solution</h2>
-<p>We can add <code>functionField</code> for evaluating a key for a given context. The <code>functionField</code> needs a function with a type <code>[String] -&gt; Item String -&gt; Compiler String</code>.</p>
-<p>We define the following <code>evalCtxKey</code> function for this purpose:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="ot">evalCtxKey ::</span> <span class="dt">Context</span> <span class="dt">String</span> <span class="ot">-&gt;</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>evalCtxKey context [key] item <span class="ot">=</span> (unContext context key [] item) <span class="op">&gt;&gt;=</span> \cf <span class="ot">-&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>        <span class="kw">case</span> cf <span class="kw">of</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>            <span class="dt">StringField</span> s <span class="ot">-&gt;</span> <span class="fu">return</span> s</span>
-<span id="cb6-5"><a href="#cb6-5"></a>            _             <span class="ot">-&gt;</span> <span class="fu">error</span> <span class="op">$</span> <span class="st">&quot;Internal error: StringField expected&quot;</span></span></code></pre></div>
-<p>Just if you need, you can also access the meta data as follows:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1"></a><span class="ot">getMetadataKey ::</span> [<span class="dt">String</span>] <span class="ot">-&gt;</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>getMetadataKey [key] item <span class="ot">=</span> getMetadataField' (itemIdentifier item) key</span></code></pre></div>
-<p>The functions <code>unContext</code>, <code>getMetadataField'</code>, and data <code>itemIdentifier</code> are already defined in Hakyll.</p>
-<p>The following is the working version of compiling <code>pages/*</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource haskell numberLines"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1"></a>match <span class="st">&quot;pages/*&quot;</span> <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>    route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>    compile <span class="op">$</span> <span class="kw">do</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>        pageName <span class="ot">&lt;-</span> takeBaseName <span class="op">.</span> toFilePath <span class="op">&lt;$&gt;</span> getUnderlying</span>
-<span id="cb8-5"><a href="#cb8-5"></a>        <span class="kw">let</span> pageCtx <span class="ot">=</span> constField pageName <span class="st">&quot;&quot;</span> <span class="ot">`mappend`</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>                      baseNodeCtx</span>
-<span id="cb8-7"><a href="#cb8-7"></a>        <span class="kw">let</span> evalCtx <span class="ot">=</span> functionField <span class="st">&quot;eval&quot;</span> (evalCtxKey pageCtx)</span>
-<span id="cb8-8"><a href="#cb8-8"></a>        <span class="kw">let</span> activeSidebarCtx <span class="ot">=</span> sidebarCtx (evalCtx <span class="op">&lt;&gt;</span> pageCtx)</span>
-<span id="cb8-9"><a href="#cb8-9"></a></span>
-<span id="cb8-10"><a href="#cb8-10"></a>        pandocCompiler</span>
-<span id="cb8-11"><a href="#cb8-11"></a>            <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;page-content&quot;</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a>            <span class="op">...</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a>            <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> (activeSidebarCtx <span class="op">&lt;&gt;</span> siteCtx)</span>
-<span id="cb8-14"><a href="#cb8-14"></a>            <span class="op">&gt;&gt;=</span> relativizeUrls</span></code></pre></div>
-<p>and the sidebar layout:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1"></a>$for(pages_list)$</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    $if(title)$</span>
-<span id="cb9-3"><a href="#cb9-3"></a>          <span class="kw">&lt;a</span><span class="ot"> class=</span><span class="st">&quot;sidebar-nav-item$if(eval(title))$ active$endif$&quot;</span><span class="ot"> href=</span><span class="st">&quot;$baseurl$$node-url$&quot;</span><span class="kw">&gt;</span>$title$<span class="kw">&lt;/a&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>    $endif$</span>
-<span id="cb9-5"><a href="#cb9-5"></a>$endfor$</span></code></pre></div>
-<p>If you want to look at an example code, please check out <a href="https://github.com/hahey/lanyon-hakyll">the codes of lanyon-hakyll</a>.</p>
-    
-      <div itemprop="keywords" class="tags">
-    <a href="./tags/haskell.html" class="tag">haskell</a> <a href="./tags/open-source.html" class="tag">open-source</a> <a href="./tags/problem-solving.html" class="tag">problem-solving</a>
-    </div>
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="./posts/2020-10-22-BMLSeminar-RL-in-finance.html">
-        Berlin Machine Learning Seminar - Examples of Reinforcement Learning Applications in the Financial Market
-      </a>
-    </h1>
-    <span class="post-date">October 22, 2020,
-      
-         Posted by Heuna Kim
-      
-    </span>
-    <p>I have given this talk on 22nd October 2020 at 19:00 to Berlin Machine Learning Seminar with the following abstract.</p>
-<h3 id="abstract">Abstract:</h3>
-<blockquote>
-<p>Reinforcement Learning has been broadly employed in financial markets for the last few years by benefiting from its nature of combining the behavior optimization (in this case buy and sell) and the market prediction. We will first discuss the hierarchical reinforcement learning scheme deployed by JPMorgan (<a href="https://arxiv.org/abs/1811.09549">arXiv</a>, NIPS Workshop 2018) and then take a look at other two examples of DRL applied in trading. The first one (<a href="https://arxiv.org/abs/1908.02646">arXiv</a>, KDD 2019) is implementing an interpretable network that works similar to a traditional trading strategy (Buying-Winners-and-Selling-Losers). The second one (<a href="https://arxiv.org/pdf/1906.11046">arXiv</a>, ICML 2019) is extending a traditional mathematical model (the Almgren and Chriss model) to a multi-agent setting in order to optimize a liquidation strategy.</p>
+          <div class="page">
+     <blockquote>
+<p>I believe in the better world to come,</p>
+<p>as we understand ourselves and our world better.</p>
 </blockquote>
-<p>The slides: <a href="https://github.com/hahey/Talks/blob/main/Berlin_Machine_Learning_Seminar_20201022/BML_RLTrading_hkim.pdf">here</a></p>
-<p>Please contact me if you have any followup questions.</p>
-<p>You can find my other technical talks in the github repo <a href="https://github.com/hahey/Talks">hahey/Talks</a>.</p>
-    
-      <div itemprop="keywords" class="tags">
-    <a href="./tags/ML-DL.html" class="tag">ML-DL</a> <a href="./tags/talk.html" class="tag">talk</a>
-    </div>
-    
-
-  </div>
-  
+<p><img src="./images/hakim.jpg" style="float: right; margin: 30px 30px 30px 30px;" /></p>
+<p>I am Heuna (pronounced as Chjanna in German, Hyeonna in English and written as 현아 in Korean) living in Berlin, and eager to experience and learn new things – usually nerdy or artistic stuff.</p>
+<p>I am specialized in algorithm development and statistical approaches (mainly machine learning and computer vision techniques) and currently working on reinforcement learning.</p>
+<p>I am applying my skills to renewable energy, anti-discrimination and refugee-related topics and projects.</p>
+<p><span class="math inline"><div class="contact-block">
+<style>
+    img.contact {height: 60px; display:inline; margin: 0px 10px 10px}
+    .contact-block {text-align: center;}
+</style>
+<span>
+<a href="./pdfs/CV_HeunaKim.pdf"><img class="contact" src="./logos_and_icons/curriculum-vitae.svg" /></a>
+<a href="./pdfs/Publications_HeunaKim.pdf"><img class="contact" src="./logos_and_icons/open-book.svg" /></a>
+<a href="https://www.github.com/hahey"><img class="contact" src="./logos_and_icons/github.png" /></a>
+<a href="https://www.linkedin.com/in/heuna-kim-a96584119"><img class="contact" src="./logos_and_icons/linkedin.png" /></a>
+</span>
 </div>
 
-<div class="pagination">
-  
-    <span class="pagination-item newer">Newer</span>
-  
-  
-    <a class="pagination-item older" href="./2/index.html">Older</a>
-  
+<span>
+<small>
+Last Update: May 27th, 2021. <br>
+Icons made by
+<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik
+</a>
+from
+<a href="https://www.flaticon.com/" title="Flaticon">
+FLATICON
+</a>.
+</small>
+</span>
+</span></p>
 </div>
 
       </div>

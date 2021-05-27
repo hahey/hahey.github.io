@@ -8,13 +8,13 @@
 
   <title>
     
-      Dynamic Sidebar or Header Activation based on the Current Page in Hakyll &middot; Dr. Heuna Kim
+      Blog Posts, Page 1 &middot; Dr. Heuna Kim
     
   </title>
 
   
       
-  <link rel="canonical" href="https://heuna-kim.net/posts/2020-11-19-Hakyll-Sidebar-Activation.html">
+  <link rel="canonical" href="https://heuna-kim.net/blog/blog_page1.html">
       
   
 
@@ -62,7 +62,7 @@
 
   <nav class="sidebar-nav">
     <a class="sidebar-nav-item" href="https://heuna-kim.net">Home</a>
-    <a class="sidebar-nav-item" href="https://heuna-kim.net/blog/blog_page1.html">Blog</a>
+    <a class="sidebar-nav-item active" href="https://heuna-kim.net/blog/blog_page1.html">Blog</a>
 
     <!--- The code below dynamically generates a sidebar nav of the files in the folder /pages -->
 
@@ -111,7 +111,73 @@
       </div>
 
       <div class="container content">
-          <div class="post">
+          <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="../posts/2021-02-18-Impression-NixOS.html">
+        Impression of using NixOS for 2.5 months
+      </a>
+    </h1>
+    <span class="post-date">February 18, 2021,
+      
+         Posted by Heuna Kim
+      
+    </span>
+    <p>For a Berlin expat, between the last Christmas and the new year is always the best time for trying out a small project that I otherwise never make time to do it. This time I have built an acrylic lamp and installed NixOS on my laptop (Lenovo E495 - AMD Ryzen 7). Since then, I have been using it and the experience was quite satisfactory. I would like to share here what I have tried and what impression I have gotten as a 2.5-month-old baby user.</p>
+<p>For reference, my NixOS configurations are <a href="https://github.com/hahey/nixos-config">here</a>.</p>
+<h3 id="shortly-about-my-general-experiences-of-different-operating-systems">Shortly about my General Experiences of Different Operating Systems:</h3>
+<p>I started using Unix-like variants in 2004 - the first one I tried was FreeBSD and Red Hat. Since 2006, I am using Linux-based systems only. I have used U/Ku/Xu-buntu (~ 2011) and switched to Mint (~2014), to Gentoo (~2017), and to Debian (~2020). At work, I have been using mostly Ubuntu, mainly due to the easier integration of the GPU acceleration with CUDA.</p>
+<h2 id="pros">Pros</h2>
+<h3 id="stress-free-installation">1. Stress-free Installation</h3>
+<p>I somehow expected that the installation of NixOS would be as complicated as Gentoo or Arch but it was as easy and fast as Debian. I wanted to install it with a LUKS setup for the disk and specifying spaces for <code>/tmp</code> with <code>TMPFS</code> and <code>/var</code>. This is very simple to do in Debian stable but not in the current Ubuntu stable. It worked out all smooth and quick and I realized that I don’t need to reserve a few days for installing NixOS. If you are interested, you can find my bash script for partitioning with LUKS <a href="https://github.com/hahey/nixos-config/blob/main/luks-tmpfs-configure.sh">here</a>.</p>
+<p>In general I felt that to install Gentoo I need to understand and configure every single detail. I can use most Debian-based distros out of the box and be agnostic about a lot of detailed setups. But it gets often too complicated if I want to customize the configurations here and there. With NixOS I was able to decide easily where on this spectrum I want to be throughout different stages of the installation.</p>
+<h3 id="up-to-date-rolling-updates-and-package-build-and-managements-directly-from-a-github-repository">2. Up-to-date Rolling Updates and Package Build and Managements directly from a Github Repository</h3>
+<ul>
+<li>Installing graphic cards, touchpads, sound devices and any other hardware-related firmwares in NixOS was much easier for me than in Ubuntu or Debian. Especially for recent AMD-based laptops, it was quite a struggle with the current Debian stable, because its kernel only supports quite old firmwares.</li>
+</ul>
+<p>With the Nix language, I could also build a package from the sources with overriding specific arguments and this package can be still managed by the Nix package manager. It happened often to me that if I wanted to build a package with a different option than what’s supported from the package manager of some distro, then I had to clone the repository and build from the sources. Then it can be quite a problem to keep them up to date and I often ended up using a deprecated version for long without realizing. This problem is more or less resolved with the Nix package manager. It is also possible to update a package directly from a Github repository with an usual update command by specifying it in the Nix configuration.</p>
+<ul>
+<li><p>Installing the AMD GPU support <code>rocm</code> in Debian and Ubuntu was really a struggle – I tried to build it from the source but then it didn’t work for me either. But with NixOS it was a one-liner and worked without efforts.</p></li>
+<li><p>The examples of other applications that I benefitted by using NixOS were <code>conky</code> and <code>MuseScore</code>. Both did some major upgrades and most of the major changes were not available in the package manager of some other stable distros. Also I was happy that the versions of Haskell ghc compilers are much more up to date in the Nix package manager.</p></li>
+</ul>
+<h3 id="centralized-and-modularized-management-of-all-rcdotfiles-and-user-specific-package-management-using-home-manager">3. Centralized and Modularized Management of All rc/dotfiles and User-Specific Package Management Using <code>Home Manager</code></h3>
+<p>Officially <code>Home Manager</code> is still under development but I like it quite a lot. I have been using a shaky <a href="https://github.com/hahey/config">self-crafted rc/dotfile manager</a> for a few years by creating a centralized folder of those configuration files and a bash script for symbolic linking and updating them automatically. It got complicated because I was using by then 1) <code>zsh</code> with <code>powerline9k</code>, 2) <code>i3</code> with <code>polybar</code> and <code>rofi</code>, 3) <code>neovim</code>, 4) <code>conky</code> and 5) some customized <code>zsh</code> aliases for Python developments and SSH connections. It took quite some time to translate my rc/dotfiles to be compatible this the NixOS <code>Home Manager</code>. Fortunately I feel that they are now better structured and not based on deprecated options or dependencies. For example, <code>powerline9k</code> is also deprecated now.</p>
+<h3 id="development-environment-with-nix-shell">4. Development Environment With <code>nix-shell</code></h3>
+<p>I haven’t tried this for Python mainly because I don’t want to force other people to use Nix. All of the Python projects that I am now working on are collaborative projects. I mainly used <code>nix-shell</code> for Haskell. I like that I should specify the dependent Nix packages for Haskell packages in the development environment. This is helpful to test the build environment and not to keep all the packages for a specific build to the whole user environment. Otherwise one can also use <code>nix-env</code> to install them in the user environment.</p>
+<h3 id="community-and-documentation">5. Community and Documentation</h3>
+<p>The community is very active and most of the documentation is quite friendly and nice. Still I have the impression that many features and developments are evolving faster than the documentation. This is probably normal and I believe that it will settle in the near future.</p>
+<h3 id="last-but-not-least-package-dependency-and-rollback">6. Last but not Least: Package Dependency and Rollback</h3>
+<p>The package dependency tree is implemented by building derivations first by creating <code>*.drv</code> files and the outputs, stored in <code>/nix/store/</code> and by generating symlinks in <code>/nix/var/nix/gcroots/</code> to the ones in <code>/nix/store/</code>. Probably this symlink-based derivations for the package manager is the most distinctive feature of the Nix package manager.</p>
+<p>I was able to observe interesting side effects thereof: for example a package A and a package B both have the dependency to a package C but they have different version requirements and it ends up that I have two different versions of C’ and C’’ in the same system.</p>
+<p>I observed that this system made indeed the desktop manager and the default running component of the OS much more stable; less danger of crashing the whole system due to dependency conflicts. This was the main reason that I gave up on using Gentoo at some point.</p>
+<p>After quasi-“compiling” the configuration with the Nix language, it creates a new version, while still keeping the old version for the rollback. These old versions will be removed only if I explicitly run a garbage collection. The <code>Home Manager</code> takes a similar approach.</p>
+<h2 id="cons">Cons</h2>
+<h3 id="compatibility">1. Compatibility</h3>
+<p>It seems to me that in general this “Nix world” is not really compatible to the world outside.</p>
+<ul>
+<li><p>The package maintainers have to use their own Nix package manager to create a hash to update the package. I found this somewhat unfriendly for people outside of this religion. I am currently using some less popular geometry software and I saw the maintainer explicitly mentioned that it is not supported in the Nix package manager. I am considering to upload it by myself soon because it seems to be not so complicated.</p></li>
+<li><p>All my user configuration files were not directly compatible with <code>Home Manager</code> and it took quite a while to convert them.</p></li>
+<li><p>As mentioned before, I cannot use <code>nix-shell</code> when I collaborate in a programming project with other people.</p></li>
+<li><p>Currently the support of <code>*.Appimage</code>, <code>*.deb</code> and <code>*.rpm</code> for NixOS is somewhat subtle. I was able to run <code>*.Appimage</code> for the note program <code>boostnote</code> that I am using. I was not able to run any <code>*.deb</code> or <code>*.rpm</code> files. Although they are intended only for the debian-based and RedHat-based package managers respectively, I was able to run them in Gentoo.</p></li>
+</ul>
+<h3 id="relatively-smaller-user-group-compared-to-debian-or-ubuntu-and-shorter-history">2. Relatively Smaller User Group compared to Debian or Ubuntu and Shorter History</h3>
+<p>The user group is relatively small (bigger than Gentoo or void Linux by now) and most of users are quite advanced so it is hard to find an answer for somewhat trivial questions.</p>
+<ul>
+<li><p>I had troubles configuring triple monitors with <code>i3</code> in NixOS. I assume that this is probably due to an AMD-related graphic driver issue but I couldn’t find any useful information. Probably there are not many people who are using NixOS with <code>i3</code> with a recent AMD laptop.</p></li>
+<li><p>While installing some package, I had some specific error to this package. I reported this issue quite some time ago. I haven’t gotten any replies yet.</p></li>
+</ul>
+<p>I imagine that I could have found solutions to these problems already if the Nix community were a bigger.</p>
+<p>In any case, I have compiled this post with <code>nix-shell</code> on NixOS. I’m curios how it will develop further with time. Any feedbacks on my <a href="https://github.com/hahey/nixos-config">NixOS configuration</a> would also be appreciated.</p>
+    
+      <div itemprop="keywords" class="tags">
+    <a href="../tags/dev-tools.html" class="tag">dev-tools</a> <a href="../tags/productivity.html" class="tag">productivity</a>
+    </div>
+    
+
+  </div>
+  
+  <div class="post">
     <h1 class="post-title">
       <a href="../posts/2020-11-19-Hakyll-Sidebar-Activation.html">
         Dynamic Sidebar or Header Activation based on the Current Page in Hakyll
@@ -214,11 +280,49 @@
 <p>If you want to look at an example code, please check out <a href="https://github.com/hahey/lanyon-hakyll">the codes of lanyon-hakyll</a>.</p>
     
       <div itemprop="keywords" class="tags">
-        <a href="../tags/haskell.html" class="tag">haskell</a> <a href="../tags/open-source.html" class="tag">open-source</a> <a href="../tags/problem-solving.html" class="tag">problem-solving</a>
+    <a href="../tags/haskell.html" class="tag">haskell</a> <a href="../tags/open-source.html" class="tag">open-source</a> <a href="../tags/problem-solving.html" class="tag">problem-solving</a>
     </div>
     
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="../posts/2020-10-22-BMLSeminar-RL-in-finance.html">
+        Berlin Machine Learning Seminar - Examples of Reinforcement Learning Applications in the Financial Market
+      </a>
+    </h1>
+    <span class="post-date">October 22, 2020,
+      
+         Posted by Heuna Kim
+      
+    </span>
+    <p>I have given this talk on 22nd October 2020 at 19:00 to Berlin Machine Learning Seminar with the following abstract.</p>
+<h3 id="abstract">Abstract:</h3>
+<blockquote>
+<p>Reinforcement Learning has been broadly employed in financial markets for the last few years by benefiting from its nature of combining the behavior optimization (in this case buy and sell) and the market prediction. We will first discuss the hierarchical reinforcement learning scheme deployed by JPMorgan (<a href="https://arxiv.org/abs/1811.09549">arXiv</a>, NIPS Workshop 2018) and then take a look at other two examples of DRL applied in trading. The first one (<a href="https://arxiv.org/abs/1908.02646">arXiv</a>, KDD 2019) is implementing an interpretable network that works similar to a traditional trading strategy (Buying-Winners-and-Selling-Losers). The second one (<a href="https://arxiv.org/pdf/1906.11046">arXiv</a>, ICML 2019) is extending a traditional mathematical model (the Almgren and Chriss model) to a multi-agent setting in order to optimize a liquidation strategy.</p>
+</blockquote>
+<p>The slides: <a href="https://github.com/hahey/Talks/blob/main/Berlin_Machine_Learning_Seminar_20201022/BML_RLTrading_hkim.pdf">here</a></p>
+<p>Please contact me if you have any followup questions.</p>
+<p>You can find my other technical talks in the github repo <a href="https://github.com/hahey/Talks">hahey/Talks</a>.</p>
+    
+      <div itemprop="keywords" class="tags">
+    <a href="../tags/ML-DL.html" class="tag">ML-DL</a> <a href="../tags/talk.html" class="tag">talk</a>
+    </div>
+    
+
+  </div>
+  
 </div>
 
+<div class="pagination">
+  
+    <span class="pagination-item newer">Newer</span>
+  
+  
+    <a class="pagination-item older" href="../blog/blog_page2.html">Older</a>
+  
+</div>
 
       </div>
     </div>
